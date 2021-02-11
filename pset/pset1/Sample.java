@@ -1,23 +1,23 @@
-public class Miles {
+class Miles {
     Miles() {
         // Add implementation here
     }
 }
 
-public class Plane {
+class Plane {
     public String getType() {
         // Add implementation here
     }
 
-    public Miles MaximumDistance() {
+    public Miles maximumDistance() {
         // Add implementation here
     }
 }
 
-public class Flight {
+class Flight {
       Plane assignedPlane;
       boolean isAssignedToPlane = false;
-      Miles FlightDuration;
+      Miles flightDuration;
 
       public String getAssignedPlaneType() {
           if (isAssignedToPlane) {
@@ -27,7 +27,7 @@ public class Flight {
 
       public boolean checkDistance() {
           if (isAssignedToPlane) {
-              return assignedPlane.MaximumDistance() > FlightDuration;
+              return assignedPlane.maximumDistance() > flightDuration;
           }
       }
 

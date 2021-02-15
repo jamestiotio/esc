@@ -16,6 +16,7 @@ public class AccountTest {
         a.setBalance(10);
         int amount = a.calAmount();
         assertTrue(amount == 30);
+        // assertTrue(amount == 40);
     }
 
     @Test

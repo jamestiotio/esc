@@ -4,7 +4,7 @@ import org.junit.Test;
 
 public class BadCodeTest {
     @Test
-    public void testDiv () {
+    public void testDiv() {
         BadCode crash = new BadCode();
 
         try {

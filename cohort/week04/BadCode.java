@@ -1,5 +1,5 @@
 public class BadCode {
-    public static int div(int a, int b) {
+    public int div(int a, int b) {
         int division = 0;
 
         //sudiptac: you should throw an exception

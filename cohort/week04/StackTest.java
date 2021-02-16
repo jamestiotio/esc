@@ -27,24 +27,41 @@ public class StackTest {
     @Test public void testToString()
     {
         System.out.println("testing");
-        stack.push(new Integer(1));
-        stack.push(new Integer(2));
+        stack.push(Integer.valueOf(1));
+        stack.push(Integer.valueOf(2));
         assertEquals ("{2, 1}", stack.toString());
     }
 
-    @Test public void testRepOk()
+    @Test public void testEmptyStack()
     {
+        System.out.println("testing");
         boolean result = stack.repOK();
-        assertEquals (true, result);
-        stack.push (new Integer (1));
-        result = stack.repOK();
-        assertEquals (true, result);
+        // Check representation of empty stack
+        assertEquals(true, result);
+    }
+
+    @Test public void testOnePush() {
+        stack.push(Integer.valueOf(1));
+        boolean result = stack.repOK();
+        // Check representation of stack after one push
+        assertEquals(true, result);
+    }
+
+    @Test public void testOnePushAndOnePop() {
+        stack.push(Integer.valueOf(1));
         stack.pop();
-        result = stack.repOK();
-        assertEquals (true, result);
-        stack.push (new Integer (1));
+        boolean result = stack.repOK();
+        // Check representation of stack after one push and one pop
+        assertEquals(true, result);
+    }
+
+    @Test public void testAlternatingPushesAndPops() {
+        stack.push(Integer.valueOf(1));
         stack.pop();
-        result = stack.repOK();
-        assertEquals (true, result);
+        stack.push(Integer.valueOf(1));
+        stack.pop();
+        boolean result = stack.repOK();
+        // Check representation of stack after alternating pushes and pops (two each in total)
+        assertEquals(true, result);
     }
 }

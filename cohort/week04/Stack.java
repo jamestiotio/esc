@@ -13,7 +13,7 @@ public class Stack<E> extends Vector<E> {
             return false;
         }
 
-        if (this.empty() != this.elements().hasMoreElements()) {
+        if (this.empty() == this.elements().hasMoreElements()) {
             return false;
         }
 

@@ -9,7 +9,7 @@ public class BadCodeTest {
 
         try {
             crash.div(2,0);
-            //sudiptac: you catch bad coder like this
+            // @sudiptac: You catch a bad coder like this
             fail("I got you :)");
         } catch (Exception e) {
             System.out.println("It is a GOOD Idea");

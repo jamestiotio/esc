@@ -3,6 +3,10 @@ public class QuickSort {
     private int array[];
     private int length;
 
+    public int[] getArray() {
+        return this.array;
+    }
+
     public void sort(int[] inputArr) {
         if (inputArr == null || inputArr.length == 0) {
             return;
@@ -12,6 +16,7 @@ public class QuickSort {
         quickSort(0, length - 1);
     }
 
+    // Quick-sort the integer array in ascending order
     private void quickSort(int lowerIndex, int higherIndex) {
         int i = lowerIndex;
         int j = higherIndex;

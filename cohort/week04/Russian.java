@@ -3,7 +3,7 @@ public class Russian {
         int toReturn = 0;
 
         while (n > 0) {
-            //System.out.println(n%2 == 1);
+            // System.out.println(n%2 == 1);
             if (n%2 == 1) {
                 toReturn += m;
             }

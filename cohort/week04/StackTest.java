@@ -6,7 +6,7 @@ import static org.junit.Assert.assertEquals;
 
 public class StackTest {
     private Stack<Integer> stack;
-    // setUp method using @Before syntax
+    // Set-up method using @Before syntax
     // @Before methods are run before each test
     @Before 
     public void runBeforeEachTest()
@@ -15,7 +15,7 @@ public class StackTest {
         stack = new Stack<Integer>();
     }
 
-    // tear-down method using @After
+    // Tear-down method using @After
     // @After methods are run after each test
     @After 
     public void runAfterEachTest()

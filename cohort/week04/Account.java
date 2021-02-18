@@ -1,4 +1,5 @@
 public class Account {
+    //@ instance private invariant balance >= 0;
     private int balance = 0;
 
     public Account() {
@@ -8,12 +9,12 @@ public class Account {
         this.balance = balance;
     }
 
-    //Doubling the balance and then plus 10
+    // Doubling the balance and then plus 10
     int calAmount() {
         // int ret = balance * 3 + 10;
         int ret = balance * 2;
         ret = ret + 10;
-        //assert(ret == balance*2+10);
+        // assert(ret == balance*2+10);
         return ret;
     }
 

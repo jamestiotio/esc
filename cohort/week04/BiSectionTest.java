@@ -13,7 +13,7 @@ public class BiSectionTest {
     @Test
     public void test4MethodCoverage () {
         assert (bi.root(0.5, 100.3, 0.1) >= 100);
-        //question: should we assert the returned value is the exact value we expect?
+        // Question: Should we assert the returned value is the exact value we expect?
     }
 
     @Test 

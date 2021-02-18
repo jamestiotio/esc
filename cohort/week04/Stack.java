@@ -28,16 +28,16 @@ public class Stack<E> extends Vector<E> {
         return true;
     }
 
-    //precondition: true
-    //postcondition: the top element in the stack is item and all the remaining elements remain unchanged. if the capacity of stack equals to the size of the stack before pushing, increase the capacity of the stack. 
+    // Pre-condition: True
+    // Post-condition: The top element in the stack is item and all the remaining elements remain unchanged. if the capacity of stack equals to the size of the stack before pushing, increase the capacity of the stack. 
     public E push(E item) {
         addElement(item);
 
         return item;
     }
 
-    //precondition: true
-    //postcondition: if the stack is empty, throws an exception; otherwise, remove the top element in the stack and leave the rest unchanged.
+    // Pre-condition: True
+    // Post-condition: If the stack is empty, throws an exception; otherwise, remove the top element in the stack and leave the rest unchanged.
     public synchronized E pop() {
         E obj;
         int len = size();

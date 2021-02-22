@@ -7,7 +7,7 @@ public class Disk {
         this.y = y;
     }
 
-    public void manipulate () {
+    public void manipulate() {
         int threshold = 1000;
         while ((threshold - (x + y)) > 0) {
             if (x > 5) {

@@ -11,13 +11,13 @@ public class BiSectionTest {
     }
 
     @Test
-    public void test4MethodCoverage () {
-        assert (bi.root(0.5, 100.3, 0.1) >= 100);
+    public void test4MethodCoverage() {
+        assert(bi.root(0.5, 100.3, 0.1) >= 100);
         // Question: Should we assert the returned value is the exact value we expect?
     }
 
     @Test 
-    public void test4LoopCoverage1 () {//loop once
+    public void test4LoopCoverage1() { // Loop once
         assert(bi.root(0,100,80) > 50);
     }
 }

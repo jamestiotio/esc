@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
+// This test suite obtains 100% method coverage
 public class BiSectionTest {
     private BiSectionExample bi;
 

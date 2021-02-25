@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class FillMessageText {
-    static String myUserName = "##escistd50.003";
+    static String myUserName = "escistd50.003";
     static String myPassword = "SUTD@Singapore";
 
     public static void main(String[] args) throws InterruptedException {

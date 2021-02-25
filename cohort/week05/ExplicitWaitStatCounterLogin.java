@@ -1,4 +1,3 @@
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -10,8 +9,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ExplicitWaitGoogleLogin {
-    static String myUserName = "###escistd50.003";
+public class ExplicitWaitStatCounterLogin {
+    static String myUserName = "escistd50.003";
     static String myPassword = "SUTD@Singapore";
 
     public static void main(String[] args) throws InterruptedException {

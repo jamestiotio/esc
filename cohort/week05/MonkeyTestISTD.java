@@ -9,7 +9,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class FindAndClickAllLink {
+public class MonkeyTestISTD {
     public static void main(String[] args) throws InterruptedException {
         // System.setProperty("webdriver.gecko.driver", "path/to/geckodriver");
         WebDriver driver = new FirefoxDriver();
@@ -17,9 +17,7 @@ public class FindAndClickAllLink {
         // System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
         // WebDriver driver = new ChromeDriver();
 
-        driver.get("https://sudiptac.bitbucket.io");
-        // driver.get("https://istd.sutd.edu.sg/");
-        // driver.get("https://www.google.com.sg");
+        driver.get("https://istd.sutd.edu.sg/");
 
         // Get all the links
         java.util.List<WebElement> links = driver.findElements(By.tagName("a"));
@@ -34,7 +32,7 @@ public class FindAndClickAllLink {
         // Maximize the browser window
         driver.manage().window().maximize();
 
-        // Click all links in a web page
+        // Click and visit all links in a web page
         for (int i = 0; i < links.size(); i++)
         {
             System.out.println("*** Navigating to" + " " + links.get(i).getAttribute("href"));

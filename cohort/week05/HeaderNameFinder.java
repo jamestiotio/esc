@@ -1,3 +1,5 @@
+import static org.junit.Assert.assertNotEquals;
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -9,17 +11,16 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class FindAndClickAllLink {
-    public static void main(String[] args) throws InterruptedException {
+public class HeaderNameFinder {
+    @Test
+    public void testNonEmptyTitles() throws InterruptedException {
         // System.setProperty("webdriver.gecko.driver", "path/to/geckodriver");
         WebDriver driver = new FirefoxDriver();
 
         // System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
         // WebDriver driver = new ChromeDriver();
 
-        driver.get("https://sudiptac.bitbucket.io");
-        // driver.get("https://istd.sutd.edu.sg/");
-        // driver.get("https://www.google.com.sg");
+        driver.get("https://istd.sutd.edu.sg/");
 
         // Get all the links
         java.util.List<WebElement> links = driver.findElements(By.tagName("a"));
@@ -48,6 +49,8 @@ public class FindAndClickAllLink {
                     // Navigate to the link
                     driver.navigate().to(links.get(i).getAttribute("href"));
                     Thread.sleep(3000);
+                    // Assert that title is not empty
+                    assertNotEquals("", driver.getTitle());
                     // Click the back button in browser
                     driver.navigate().back();
                     links = driver.findElements(By.tagName("a"));

@@ -1,23 +1,26 @@
-
-
 import java.util.Calendar;
 import java.util.Date;
 
 public class exercise4 {
 	public static void main (String[] args) throws InterruptedException {
-	  Calendar cal1 = new CalendarSubclass();
-    cal1.setTime(new Date());
-    Thread.sleep(1000);
-    Calendar cal2 = new CalendarSubclass();
-    cal2.setTime(new Date());
-    System.out.println(cal2.after(cal1));
-    System.out.println(cal1.after(cal2));
-    System.out.println(cal1.after(cal1));
-    System.out.println(cal2.after(cal2));
+	Calendar cal1 = new CalendarSubclass();
+	cal1.setTime(new Date());
+	Thread.sleep(1000);
+	Calendar cal2 = new CalendarSubclass();
+	cal2.setTime(new Date());
+	System.out.println(cal2.after(cal1));
+	System.out.println(cal1.after(cal2));
+	System.out.println(cal1.after(cal1));
+	System.out.println(cal2.after(cal2));
 	}
 }
 
 class CalendarSubclass extends Calendar {
+	/**
+	*
+	*/
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	public boolean after(Object when) {
 		if (when instanceof Calendar && super.compareTo((Calendar) when) == 0) {
@@ -38,7 +41,6 @@ class CalendarSubclass extends Calendar {
 		return (currentFirstDayOfWeek > anotherFirstDayOfWeek) ? 1
 				: (currentFirstDayOfWeek == anotherFirstDayOfWeek) ? 0 : -1;
 	}
-	
 
 	// Implementation of other Calendar abstract methods skipped
 
@@ -87,6 +89,5 @@ class CalendarSubclass extends Calendar {
 	@Override
 	public void roll(int field, boolean up) {
 		// TODO Auto-generated method stub
-		
 	}
 }

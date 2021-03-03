@@ -1,10 +1,9 @@
 public class QuickSort {
-
     private int array[];
     private int length;
 
     public int[] getArray() {
-        return this.array;
+        return this.array.clone();
     }
 
     public void sort(int[] inputArr) {

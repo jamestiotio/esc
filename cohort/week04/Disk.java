@@ -11,7 +11,7 @@ public class Disk {
     // Condition coverage is separate from the rest
     public void manipulate() {
         int threshold = 1000;
-        // Loops and recursions have potential to be non-terminating
+        // Loops and recursions might have potential to be non-terminating
         while ((threshold - (x + y)) > 0) {
             if (x > 5) {
                 threshold = threshold - 1;

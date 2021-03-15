@@ -26,7 +26,7 @@ public class AccountTest {
 
     @Test
     public void testWithDraw() {
-        Account a = new Account(); 
+        Account a = new Account();
         a.setBalance(100);
         boolean success = a.withdraw(1000);
         assertFalse(success);

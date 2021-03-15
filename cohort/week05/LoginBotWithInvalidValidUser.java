@@ -16,8 +16,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginBotWithInvalidValidUser {
     // Only the last final entries of both arrays are valid
-    private static String[] usernames = {"", "su@mymail.sutd.edu.sg", "su@@sutd.edu.sg", "esc@istd50/?10.3", "escistd50.003", "escistd50.003"};
-    private static String[] passwords = {"", "Some Password with Whitespaces", "aaaaaaaaaaaaaaaaaaaaaaa", "$$6**@I.do.not.know", "wrong_password", "SUTD@Singapore"};
+    private static String[] usernames = {"", "su@mymail.sutd.edu.sg", "su@@sutd.edu.sg",
+            "esc@istd50/?10.3", "escistd50.003", "escistd50.003"};
+    private static String[] passwords = {"", "Some Password with Whitespaces",
+            "aaaaaaaaaaaaaaaaaaaaaaa", "$$6**@I.do.not.know", "wrong_password", "SUTD@Singapore"};
 
     @Test
     public void testInvalidInputs() throws InterruptedException {
@@ -45,7 +47,8 @@ public class LoginBotWithInvalidValidUser {
             try {
                 WebDriverWait wait = new WebDriverWait(driver, 10);
                 // Wait only until the project front page loads
-                wait.until(ExpectedConditions.elementToBeClickable(By.id("project-name-p12207705")));
+                wait.until(
+                        ExpectedConditions.elementToBeClickable(By.id("project-name-p12207705")));
                 // Click project link
                 driver.findElement(By.id("project-name-p12207705")).click();
                 fail("NoSuchElementException should have been raised.");

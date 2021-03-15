@@ -24,7 +24,7 @@ public class MonkeyTestISTD {
         System.out.println(links.size());
 
         // Print all the links
-        for (int i = 0; i < links.size(); i=i+1) {
+        for (int i = 0; i < links.size(); i = i + 1) {
             System.out.println(i + " " + links.get(i).getText());
             System.out.println(i + " " + links.get(i).getAttribute("href"));
         }
@@ -33,10 +33,10 @@ public class MonkeyTestISTD {
         driver.manage().window().maximize();
 
         // Click and visit all links in a web page
-        for (int i = 0; i < links.size(); i++)
-        {
+        for (int i = 0; i < links.size(); i++) {
             System.out.println("*** Navigating to" + " " + links.get(i).getAttribute("href"));
-            // if (links.get(i).getAttribute("href") == null || links.get(i).getAttribute("href").equals("https://sudiptac.bitbucket.io"))
+            // if (links.get(i).getAttribute("href") == null ||
+            // links.get(i).getAttribute("href").equals("https://sudiptac.bitbucket.io"))
             if (links.get(i).getAttribute("href") == null)
                 continue;
             boolean staleElementLoaded = true;
@@ -49,7 +49,8 @@ public class MonkeyTestISTD {
                     // Click the back button in browser
                     driver.navigate().back();
                     links = driver.findElements(By.tagName("a"));
-                    System.out.println("*** Navigated to" + " " + links.get(i).getAttribute("href"));
+                    System.out
+                            .println("*** Navigated to" + " " + links.get(i).getAttribute("href"));
                     staleElementLoaded = false;
                 } catch (StaleElementReferenceException e) {
                     staleElementLoaded = true;

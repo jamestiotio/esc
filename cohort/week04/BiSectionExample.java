@@ -3,20 +3,19 @@ public class BiSectionExample {
         double middle;
 
         if (d >= e) {
-            throw new IllegalArgumentException ("low must be lower than high");
+            throw new IllegalArgumentException("low must be lower than high");
         }
 
         System.out.println(d + " " + e + " " + f);
 
-        while(e - d > f) {
+        while (e - d > f) {
             System.out.println("once");
             middle = (e + d) / 2;
             if (middle < e) {
-                    System.out.println("if " + middle + " " + d + " " + e);
+                System.out.println("if " + middle + " " + d + " " + e);
                 d = middle;
-            }
-            else {
-                    System.out.println("else " + middle + " " + d + " " + e);
+            } else {
+                System.out.println("else " + middle + " " + d + " " + e);
                 e = middle;
             }
         }
@@ -28,6 +27,6 @@ public class BiSectionExample {
 
     public static void main(String[] args) {
         BiSectionExample BB = new BiSectionExample();
-        BB.root(0,100, 0);
+        BB.root(0, 100, 0);
     }
 }

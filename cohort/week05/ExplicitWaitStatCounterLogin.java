@@ -41,7 +41,7 @@ public class ExplicitWaitStatCounterLogin {
             // Click project link
             driver.findElement(By.id("project-name-p12207705")).click();
         } catch (Exception NoSuchElementException) {
-                System.out.println("login/password name invalid");
+            System.out.println("login/password name invalid");
         }
     }
 }

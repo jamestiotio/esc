@@ -4,7 +4,7 @@ public class BadCode {
 
         // @sudiptac: You should throw an exception
         if (b == 0) {
-        throw new IllegalArgumentException("Denominator is 0");
+            throw new IllegalArgumentException("Denominator is 0");
         }
 
         try {

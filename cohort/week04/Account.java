@@ -1,5 +1,5 @@
 public class Account {
-    //@ instance private invariant balance >= 0;
+    // @ instance private invariant balance >= 0;
     private int balance = 0;
 
     public Account() {
@@ -26,8 +26,7 @@ public class Account {
         if (balance >= amount) {
             balance -= amount;
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -43,8 +42,7 @@ public class Account {
     public int compare(Account yourAccount) {
         if (yourAccount.getBalance() != 0) {
             return balance / yourAccount.balance;
-        }
-        else {
+        } else {
             return -1;
         }
     }

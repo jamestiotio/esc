@@ -64,12 +64,14 @@ public class RussianTest {
     // This test will fail (integer overflow)
     @Test
     public void faultBasedTest2() {
-        assertEquals((int)(Math.pow(Integer.MAX_VALUE, 2)), Russian.multiply(Integer.MAX_VALUE, Integer.MAX_VALUE));
+        assertEquals((int) (Math.pow(Integer.MAX_VALUE, 2)),
+                Russian.multiply(Integer.MAX_VALUE, Integer.MAX_VALUE));
     }
 
     // This test will fail (cannot handle a negative value of n)
     @Test
     public void faultBasedTest3() {
-        assertEquals((int)(Math.pow(Integer.MIN_VALUE, 2)), Russian.multiply(Integer.MIN_VALUE, Integer.MIN_VALUE));
+        assertEquals((int) (Math.pow(Integer.MIN_VALUE, 2)),
+                Russian.multiply(Integer.MIN_VALUE, Integer.MIN_VALUE));
     }
 }

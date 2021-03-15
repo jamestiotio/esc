@@ -1,7 +1,8 @@
-// Take note that this implementation of FindMax is purposefully/intentionally/meant to be buggy/wrong (it does not traverse all the way until/to the end of the array)
+// Take note that this implementation of FindMax is purposefully/intentionally/meant to be
+// buggy/wrong (it does not traverse all the way until/to the end of the array)
 public class FindMax {
     public static void main(String[] arg) throws Exception {
-        System.out.println(max(new int[]{5,6,17,8,2}));
+        System.out.println(max(new int[] {5, 6, 17, 8, 2}));
     }
 
     public static int max(int[] list) {

@@ -8,7 +8,7 @@ public class BadCodeTest {
         BadCode crash = new BadCode();
 
         try {
-            crash.div(2,0);
+            crash.div(2, 0);
             // @sudiptac: You catch a bad coder like this
             fail("I got you :)");
         } catch (Exception e) {

@@ -4,19 +4,20 @@ import java.util.Calendar;
 import java.util.List;
 
 
-public class ShootTheAccount {
+public class ShootTheAccountPlus {
     private int balance = 0;
     private List<Transaction> ListOfAllTransactions = new ArrayList<Transaction>();
     private String lastDebitTime;
+    private String type;
 
-    public ShootTheAccount() {
+    public ShootTheAccountPlus() {
     }
 
-    public ShootTheAccount(int balance) {
+    public ShootTheAccountPlus(int balance) {
         this.balance = balance;
     }
 
-    public void deposite(int amount) {
+    public void deposit(int amount) {
         balance += amount;
     }
 
@@ -28,11 +29,14 @@ public class ShootTheAccount {
         return balance;
     }
 
+    public boolean check() {
+        return (balance >= 500 || !type.equals("personal"));
+    }
 
     // this method has a long method smell
     public void DebitTransaction(int amount) {
 
-        if (balance >= 500) {
+        if (check()) {
             // reduce the amount
             balance = balance - amount;
 
@@ -50,7 +54,7 @@ public class ShootTheAccount {
     // this method has a long method smell
     public void Transfer(int amount, ShootTheAccount Benf) {
 
-        if (balance >= 500) {
+        if (check()) {
             // reduce the amount
             balance = balance - amount;
 
@@ -68,7 +72,7 @@ public class ShootTheAccount {
     }
 
     public void sendWarning() {
-        if (balance < 500)
+        if (!check())
             System.out.println("Balance must be more than 500, please deposit");
     }
 }

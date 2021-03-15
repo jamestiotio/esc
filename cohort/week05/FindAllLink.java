@@ -17,12 +17,12 @@ public class FindAllLink {
 
         System.out.println("***Printing all link names***");
         // Print all the links
-        for (int i = 0; i < links.size(); i=i+1) {
+        for (int i = 0; i < links.size(); i = i + 1) {
             System.out.println(i + " " + links.get(i).getText());
         }
         System.out.println("***Printing all link addresses***");
         // Print all the hyper links
-        for (int i = 0; i < links.size(); i=i+1) {
+        for (int i = 0; i < links.size(); i = i + 1) {
             System.out.println(i + " " + links.get(i).getAttribute("href"));
         }
     }

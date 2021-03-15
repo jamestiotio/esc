@@ -26,13 +26,16 @@ public class BrokenLinkFinder {
             linkConnection.connect();
             // Check whether the connection is responding
             acknowledge = linkConnection.getResponseMessage();
-            code = linkConnection.getResponseCode();    // This response code should be 200 if connection is successful/link is valid/link exists
+            code = linkConnection.getResponseCode(); // This response code should be 200 if
+                                                     // connection is successful/link is valid/link
+                                                     // exists
             // Disconnect the connection links
             linkConnection.disconnect();
             System.out.println("*** The link " + "returned " + code);
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("*** Throws exception " + e.toString());
-            System.out.println("*** The link " + "is not HTTP or requires certificate validation, message = " + acknowledge);
+            System.out.println("*** The link "
+                    + "is not HTTP or requires certificate validation, message = " + acknowledge);
         }
     }
 
@@ -55,18 +58,20 @@ public class BrokenLinkFinder {
         System.out.println(links.size());
 
         // Print all the links
-        for (int i = 0; i < links.size(); i=i+1) {
+        for (int i = 0; i < links.size(); i = i + 1) {
             System.out.println(i + " " + links.get(i).getText());
             System.out.println(i + " " + links.get(i).getAttribute("href"));
         }
 
         // Call broken link checker for all the links found
-        for (int i = 50; i < links.size(); i=i+1) {
+        for (int i = 50; i < links.size(); i = i + 1) {
             try {
-                    // System.out.println("*** Checking link " + i);
-                    brokenLinkChecker(new URL(links.get(i).getAttribute("href")));
+                // System.out.println("*** Checking link " + i);
+                brokenLinkChecker(new URL(links.get(i).getAttribute("href")));
             } catch (Exception e) {
-                    System.out.println("This is not a proper HTTP URL or requires certificate validation " + links.get(i).getAttribute("href"));
+                System.out
+                        .println("This is not a proper HTTP URL or requires certificate validation "
+                                + links.get(i).getAttribute("href"));
             }
         }
     }

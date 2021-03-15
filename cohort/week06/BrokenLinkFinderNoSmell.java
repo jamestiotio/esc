@@ -13,7 +13,18 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class BrokenLinkFinderSmell {
+public class BrokenLinkFinderNoSmell {
+    public static String makeConnection(HttpURLConnection linkConnection) throws Exception {
+        System.out.println("*** Checking link " + linkConnection.toString());
+        // initiate an HTTP connection
+        linkConnection.connect();
+        // check whether the connection is responding
+        String acknowledge = linkConnection.getResponseMessage();
+        // disconnect the connection link
+        linkConnection.disconnect();
+
+        return acknowledge;
+    }
 
     // this is a function which checks whether a given hyper link in a web page is broken
     public static void brokenLinkChecker(URL hyperLink) throws Exception {
@@ -22,13 +33,8 @@ public class BrokenLinkFinderSmell {
         HttpURLConnection linkConnection = (HttpURLConnection) hyperLink.openConnection();
 
         try {
-            System.out.println("*** Checking link " + hyperLink.toString());
-            // initiate an HTTP connection
-            linkConnection.connect();
             // check whether the connection is responding
-            acknowledge = linkConnection.getResponseMessage();
-            // disconnect the connection link
-            linkConnection.disconnect();
+            acknowledge = makeConnection(linkConnection);
             System.out.println("*** The link " + "returned " + acknowledge);
         } catch (Exception e) {
             System.out.println("*** The link " + "is broken, message = " + acknowledge);
@@ -41,12 +47,8 @@ public class BrokenLinkFinderSmell {
         HttpURLConnection linkConnection = (HttpURLConnection) hyperLink.openConnection();
 
         try {
-            // initiate an HTTP connection
-            linkConnection.connect();
             // check whether the connection is responding
-            acknowledge = linkConnection.getResponseMessage();
-            // disconnect the connection link
-            linkConnection.disconnect();
+            acknowledge = makeConnection(linkConnection);
             // print if redirected permanently
             if (acknowledge.equals("Moved Permanently"))
                 return true;

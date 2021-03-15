@@ -3,11 +3,15 @@ abstract class Employee {
 }
 
 
-class Professor extends Employee {
+interface Researcher {
+    void doResearch();
+}
 
+
+class Professor extends Employee implements Researcher {
     // Professor do research, teaching, admin, outreach
 
-    void doResearch() {
+    public void doResearch() {
 
     }
 
@@ -25,14 +29,11 @@ class Professor extends Employee {
 }
 
 
-class Postdoc extends Professor {
-
+class Postdoc implements Researcher {
     // Postdoc do research (but no teaching, admin or outreach duties)
-    // inheriting from professor class is flawed as many inherited functions
-    // remain completely unused
+    public void doResearch() {
 
-    // This is refused Bequest
-
+    }
 }
 
 
@@ -41,6 +42,6 @@ class Admin extends Employee {
 }
 
 
-public class RefusedBequestSmell {
+public class RefusedBequestNoSmell {
 
 }

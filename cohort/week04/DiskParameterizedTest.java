@@ -19,7 +19,7 @@ public class DiskParameterizedTest {
     // Do take note that the second set of input values will cause the test to not terminate
     @Parameterized.Parameters
     public static Collection<Object[]> parameters() {
-        return Arrays.asList(new Object[][]{{4, 11}, {1001, -2}, {4, 13}});
+        return Arrays.asList(new Object[][] {{4, 11}, {1001, -2}, {4, 13}});
     }
 
     @Test

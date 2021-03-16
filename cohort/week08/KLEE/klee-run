@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#compile the source file into intermediate bitcode file
+#you may consider bitcode is something equivalent to the 
+#level of bytecode
+
+llvm-gcc --emit-llvm -o $1.bc -c $1.c
+
+# run KLEE and produce SMT file for each path
+
+klee --write-smt2s $1.bc

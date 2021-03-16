@@ -1,5 +1,3 @@
-
-
 public class Population {
 
     Individual[] individuals;

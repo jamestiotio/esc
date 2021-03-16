@@ -1,5 +1,3 @@
-
-
 public class FitnessCalc {
 
     static char[] solution = new char[64];

@@ -1,4 +1,3 @@
-package Week9;
 public class InterruptExample1 {
     public static void main(String args[]) {
         AThread t1 = new AThread();
@@ -17,6 +16,7 @@ public class InterruptExample1 {
     }
 }
 
+
 class AThread extends Thread {
     public void run() {
         try {
@@ -25,9 +25,8 @@ class AThread extends Thread {
             System.out.println("done sleeping");
         } catch (InterruptedException e) {
             System.out.println("InterruptedException caught");
-            //do work.
-            //throw new RuntimeException("Thread interrupted...");
+            // do work.
+            // throw new RuntimeException("Thread interrupted...");
         }
     }
 }
-	

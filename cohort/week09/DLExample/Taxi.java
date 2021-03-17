@@ -1,4 +1,4 @@
-package Week9.DLExample;
+package DLExample;
 
 public class Taxi {
     private Point location, destination;

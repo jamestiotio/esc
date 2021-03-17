@@ -1,5 +1,3 @@
-package Week11;
-
 public class TransferFixed {
     private static final Object tieLock = new Object();
 

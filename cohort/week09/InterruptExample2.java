@@ -1,4 +1,3 @@
-package Week9;
 class InterruptExample2 extends Thread {
     private int id;
 
@@ -9,7 +8,7 @@ class InterruptExample2 extends Thread {
     public void run() {
         for (int i = 1; i <= 10000000; i++) {
             if (this.isInterrupted()) {
-//                break;//handles the interrupt signal.
+                // break;//handles the interrupt signal.
                 try {
                     throw new InterruptedException("being interrupted");
                 } catch (InterruptedException e) {
@@ -19,7 +18,7 @@ class InterruptExample2 extends Thread {
 
             }
             System.out.println("thread " + id + " printing " + i);
-        }//end of for loop
+        } // end of for loop
     }
 
     public static void main(String args[]) throws InterruptedException {
@@ -30,4 +29,4 @@ class InterruptExample2 extends Thread {
         System.out.println("thread is interrupted? " + t2.isInterrupted());
         System.out.println("thread 2 is alive? " + t2.isAlive());
     }
-}  
+}

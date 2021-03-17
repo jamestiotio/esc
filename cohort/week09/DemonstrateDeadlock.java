@@ -1,5 +1,3 @@
-package Week9;
-
 import java.util.Random;
 
 public class DemonstrateDeadlock {
@@ -17,6 +15,7 @@ public class DemonstrateDeadlock {
     }
 }
 
+
 class TransferThread extends Thread {
     private static final int NUM_ITERATIONS = 100;
     private Account[] accounts;
@@ -32,7 +31,8 @@ class TransferThread extends Thread {
             int toAcct = rnd.nextInt(accounts.length);
             int amount = rnd.nextInt(1000);
             transferMoney(accounts[fromAcct], accounts[toAcct], amount);
-            System.out.println("Finished Iteration:" + i + " for thread Id:" + currentThread().getId());
+            System.out.println(
+                    "Finished Iteration:" + i + " for thread Id:" + currentThread().getId());
         }
     }
 
@@ -50,9 +50,11 @@ class TransferThread extends Thread {
     }
 }
 
+
 class Account {
     private final int id;
     private int amount;
+
     public Account(int i) {
         id = i;
     }
@@ -68,6 +70,7 @@ class Account {
     public void credit(int n) {
         amount = amount + n;
     }
+
     public int getId() {
         return id;
     }

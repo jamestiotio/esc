@@ -1,5 +1,3 @@
-package Week9;
-
 public class HelloWorldThread {
     public static void main(String[] args) {
         double K = 20, a = 1.2, t = 2;
@@ -20,8 +18,8 @@ public class HelloWorldThread {
     }
 
     public static void PrintMatrix(int[][] toprint) {
-        //assume that toprint is a square matrix
-        //assume that toprint is not []
+        // assume that toprint is a square matrix
+        // assume that toprint is not []
         for (int i = 0; i < toprint.length; i++) {
             for (int j = 0; j < toprint[0].length; j++) {
                 System.out.print(toprint[i][j] + "\t");
@@ -30,6 +28,7 @@ public class HelloWorldThread {
         }
     }
 }
+
 
 class Thread1 extends Thread {
     private double K, a, t, value;
@@ -48,6 +47,7 @@ class Thread1 extends Thread {
         return value;
     }
 }
+
 
 class Thread2 extends Thread {
     private double a, t, value;

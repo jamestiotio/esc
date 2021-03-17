@@ -1,4 +1,3 @@
-
 class Point {
 
     int x;
@@ -28,6 +27,4 @@ public class PointDataClass {
 
 
     }
-
-
 }

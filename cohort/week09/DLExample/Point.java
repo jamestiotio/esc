@@ -1,4 +1,5 @@
-package Week9.DLExample;
+package DLExample;
+
 public class Point {
 
 }

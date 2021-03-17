@@ -1,4 +1,3 @@
-package Week9;
 public class RunnableExample {
     public static void main(String[] args) throws Exception {
         int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -19,6 +18,8 @@ public class RunnableExample {
         }
     }
 }
+
+
 class Summer implements Runnable {
     int[] array;
     int lower;

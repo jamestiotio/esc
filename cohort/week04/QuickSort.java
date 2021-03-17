@@ -3,7 +3,7 @@ public class QuickSort {
     private int length;
 
     public int[] getArray() {
-        return this.array.clone();
+        return this.array;
     }
 
     public void sort(int[] inputArr) {

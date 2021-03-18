@@ -7,4 +7,3 @@ These scripts utilize the [GeckoDriver](https://github.com/mozilla/geckodriver) 
 In terms of the greybox and whitebox fuzzers, EvoSuite can be downloaded and installed from [here](https://www.evosuite.org/downloads/), while KLEE can be downloaded and installed from [here](https://klee.github.io/getting-started/).
 
 > Unfortunately, this KLEE does not come with [explosives that go boom](https://genshin.mihoyo.com/en/character/mondstadt?char=8)... 😣
-

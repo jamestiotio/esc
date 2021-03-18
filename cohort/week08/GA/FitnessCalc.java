@@ -1,5 +1,4 @@
 public class FitnessCalc {
-
     static char[] solution = new char[64];
 
     public static void setSolution(char[] newSolution) {
@@ -16,12 +15,14 @@ public class FitnessCalc {
         setSolution(newSolution.toCharArray());
     }
 
-    // Calculate inidividuals fittness by comparing it to our candidate solution
+    // Calculate individual's fitness by comparing it to our candidate solution
     static int getFitness(Individual individual) {
         int fitness = 0;
-        // Loop through our individuals genes and compare them to our cadidates
-        for (int i = 0; i < individual.size(); i++) {
-            fitness -= Math.abs(individual.getGene(i) - solution[i]);
+        // Loop through our individuals genes and compare them to our candidates
+        // for (int i = 0; i < individual.size(); i++) {
+        for (int i = 0; i < individual.size() / 2; i++) {
+            // fitness -= Math.abs(individual.getGene(i) - solution[i]);
+            fitness -= Math.abs(individual.getGene(i) - individual.getGene(individual.size() - 1 - i));
         }
 
         return fitness;

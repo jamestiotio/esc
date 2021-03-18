@@ -1,7 +1,5 @@
 public class GA {
-
     public static void main(String[] args) {
-
         // Set a candidate solution
         // FitnessCalc.setSolution("This is the string test input that we wanted!");
         FitnessCalc.setSolution("http://www.ietf.org/rfc/rfc1738.txt");

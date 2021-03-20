@@ -1,5 +1,6 @@
 int main()
 {
+    // "x" does not have any concrete values here (i.e., "x" is just a symbol)
     int x, i = 0;
     int y;
 

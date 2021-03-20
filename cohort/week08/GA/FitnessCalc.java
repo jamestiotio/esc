@@ -21,8 +21,8 @@ public class FitnessCalc {
         // Loop through our individuals genes and compare them to our candidates
         // for (int i = 0; i < individual.size(); i++) {
         for (int i = 0; i < individual.size() / 2; i++) {
-            // fitness -= Math.abs(individual.getGene(i) - solution[i]);
-            fitness -= Math.abs(individual.getGene(i) - individual.getGene(individual.size() - 1 - i));
+            // fitness -= Math.abs(individual.getGene(i) - solution[i]);   // This is to generate a fixed static target text
+            fitness -= Math.abs(individual.getGene(i) - individual.getGene(individual.size() - 1 - i)); // This is to generate a palindrome string
         }
 
         return fitness;

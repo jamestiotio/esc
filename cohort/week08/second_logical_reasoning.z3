@@ -1,5 +1,5 @@
 ; This example illustrates basic arithmetic and uninterpreted functions
-; This set of constraints should be unsatisfiable (and hence the specified line of code is unreachable and the bug will never be encountered)
+; This set of constraints should be satisfiable
 
 (declare-fun x1 () Int)
 (declare-fun x2 () Int)
@@ -21,6 +21,7 @@
 (assert (= (- x3 y3) y4))
 (assert (= (- x4 y4) x5))
 (assert (= y5 y4))
-(assert (> x5 y5))
+(assert (<= x5 y5))
 (check-sat)
+(get-model)
 (exit)

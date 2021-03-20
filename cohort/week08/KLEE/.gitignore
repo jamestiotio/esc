@@ -1,0 +1,7 @@
+*.bc
+*.ll
+*.smt2
+*.ktest
+
+klee-last/
+klee-out-*

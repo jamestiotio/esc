@@ -19,7 +19,7 @@ public class RunnableExample {
     }
 }
 
-
+// In general, "implements Runnable" is better than "extends Thread" (both still use threads as the underlying mechanism)
 class Summer implements Runnable {
     int[] array;
     int lower;

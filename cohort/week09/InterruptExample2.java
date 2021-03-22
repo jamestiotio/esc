@@ -8,7 +8,7 @@ class InterruptExample2 extends Thread {
     public void run() {
         for (int i = 1; i <= 10000000; i++) {
             if (this.isInterrupted()) {
-                // break;//handles the interrupt signal.
+                // break;  // handles the interrupt signal.
                 try {
                     throw new InterruptedException("being interrupted");
                 } catch (InterruptedException e) {

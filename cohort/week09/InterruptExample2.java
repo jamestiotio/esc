@@ -15,7 +15,6 @@ class InterruptExample2 extends Thread {
                     e.printStackTrace();
                     break;
                 }
-
             }
             System.out.println("thread " + id + " printing " + i);
         } // end of for loop

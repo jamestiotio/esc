@@ -21,7 +21,7 @@ class AThread extends Thread {
     public void run() {
         try {
             System.out.println("running");
-            Thread.sleep(10000);
+            Thread.sleep(10000);    // Blocking method
             System.out.println("done sleeping");
         } catch (InterruptedException e) {
             System.out.println("InterruptedException caught");

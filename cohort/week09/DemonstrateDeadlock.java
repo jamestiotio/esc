@@ -36,6 +36,7 @@ class TransferThread extends Thread {
         }
     }
 
+    // Even though this method by itself is asymmetric (no other method with swapped/mirrored locking), deadlock might still happen if two accounts are trying to call transferMoney to each other
     public void transferMoney(Account from, Account to, int amount) {
         synchronized (from) {
             synchronized (to) {

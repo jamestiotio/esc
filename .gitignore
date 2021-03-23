@@ -1,6 +1,9 @@
 .vscode/
 *.code-workspace
 
+.DS_Store
+Thumbs.db
+
 # Compiled class file
 *.class
 

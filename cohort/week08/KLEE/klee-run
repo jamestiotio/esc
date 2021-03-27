@@ -4,7 +4,7 @@
 #you may consider bitcode is something equivalent to the 
 #level of bytecode
 
-llvm-gcc --emit-llvm -o $1.bc -c $1.c
+clang-9 -I $KLEE_DIR/include -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone $1.c
 
 # run KLEE and produce SMT file for each path
 

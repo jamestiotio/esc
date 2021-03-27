@@ -6,7 +6,6 @@ import org.evosuite.Properties.Algorithm;
 import org.evosuite.result.TestGenerationResult;
 
 public class Test {
-
     @SuppressWarnings("unchecked")
     public void evosuite(String targetClass, String cp) {
         EvoSuite evo = new EvoSuite();
@@ -33,5 +32,4 @@ public class Test {
         Test t = new Test();
         t.evosuite(targetClass, cp);
     }
-
 }

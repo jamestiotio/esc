@@ -1,5 +1,4 @@
 public class Example {
-
     public void test(double x, double y, int z) {
         if (x - y < 0) {
             if (y > 10) {

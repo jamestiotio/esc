@@ -1,6 +1,7 @@
 #!/bin/sh
 # This script can be used to install KLEE with LLVM 9, Clang, Z3 and uClibc on Ubuntu 18.04
 # All the corresponding cloned git directories will be placed at the home folder of the current user
+# This script is specifically for the Bash shell, and thus if you use other shells, modify `.bashrc` accordingly to the appropriate filename
 # Created by James Raphael Tiovalen (2021)
 
 # Move to home directory of current user

@@ -1,4 +1,6 @@
 #!/bin/bash
 
+# To run this script: ./run_evosuite Example .
+
 javac $1.java
 java -jar evosuite-1.1.0.jar -class $1 -projectCP $2

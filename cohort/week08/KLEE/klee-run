@@ -1,11 +1,13 @@
 #!/bin/bash
 
-#compile the source file into intermediate bitcode file
-#you may consider bitcode is something equivalent to the 
-#level of bytecode
+# To run this script: ./klee-run filename
+# Filename can be test_exp, test_simple or test_sym
+
+# Compile the source file into intermediate bitcode file
+# You may consider bitcode is something equivalent to the level of bytecode
 
 clang-9 -I $KLEE_DIR/include -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone $1.c
 
-# run KLEE and produce SMT file for each path
+# Run KLEE and produce SMT file for each path
 
 klee --write-smt2s $1.bc

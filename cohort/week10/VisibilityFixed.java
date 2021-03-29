@@ -1,4 +1,6 @@
 public class VisibilityFixed extends Thread {
+    // Force the variable to be dumped to the main memory to ensure its visibility (but it cannot
+    // replace the synchronized keyword)
     volatile boolean keepRunning = true;
 
     public static void main(String[] args) throws InterruptedException {

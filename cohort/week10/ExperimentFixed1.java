@@ -1,5 +1,6 @@
-public class Experiment {
-    private static int MY_INT = 0;
+public class ExperimentFixed1 {
+    // The volatile keyword cost an additional memory load
+    private static volatile int MY_INT = 0;
 
     public static void main(String[] args) throws InterruptedException {
         new ChangeListener().start();

@@ -34,6 +34,8 @@ class WDer2 extends Thread {
     int whatIGot = 0;
 
     public void run() {
+        // The synchronized keyword prevents code statement interleaving by using the object itself
+        // as a mutex lock
         synchronized (SecondErrorFixed.amount) {
             if (SecondErrorFixed.amount.intValue() >= 1000) {
                 try {
@@ -42,6 +44,7 @@ class WDer2 extends Thread {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                // Now, only 5 threads will be able to make the modification
                 SecondErrorFixed.amount.addAndGet(-1000);
                 whatIGot = 1000;
             }

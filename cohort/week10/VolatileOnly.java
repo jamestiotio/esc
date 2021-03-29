@@ -1,8 +1,10 @@
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class VolatileOnly {
-    public volatile int inc = 0;
+    public volatile AtomicInteger inc = new AtomicInteger(0);
 
     public void increase() {
-        inc++;
+        inc.incrementAndGet();
     }
 
     public static void main(String[] args) {
@@ -17,6 +19,9 @@ public class VolatileOnly {
         }
         while (Thread.activeCount() > initialCount)
             Thread.yield();
-        System.out.println(test.inc);
+        // Final result should be 1000 * 10 = 10000 (modification is visible to everyone but race
+        // condition still happens if we only use a normal int instead of AtomicInteger).
+        // Lock ensures memory visibility and thus guarantees synchronization.
+        System.out.println(test.inc.intValue());
     }
 }

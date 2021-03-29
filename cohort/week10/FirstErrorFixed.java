@@ -16,6 +16,8 @@ class B extends Thread {
 
 
 public class FirstErrorFixed {
+    // Disallow concurrent access by multiple threads by using AtomicInteger to fix the race
+    // condition
     public static AtomicInteger count = new AtomicInteger(0);
 
     public static void main(String args[]) {

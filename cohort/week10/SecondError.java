@@ -1,6 +1,7 @@
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class SecondError {
+    // This still does not solve the race condition issue
     public static AtomicInteger amount = new AtomicInteger(5000);
 
     public static void main(String args[]) {
@@ -45,6 +46,8 @@ class Withdrawer extends Thread {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            // Between the if conditional check statement and this modification line, they are not
+            // atomic
             SecondError.amount.set(SecondError.amount.get() - 1000);
             whatIGot = 1000;
         }

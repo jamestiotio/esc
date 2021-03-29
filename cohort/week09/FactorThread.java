@@ -1,9 +1,10 @@
 import java.math.BigInteger;
-import java.util.Arrays;
 
 public class FactorThread {
-    // Define desired thread count/number of threads (time complexity: O(n/k), where k is the number of threads)
+    // Define desired thread count/number of threads (time complexity: O(n/k), where k is the number
+    // of threads)
     public static final int numberOfThreads = 8;
+    // There is no need to declare this as a variable of type AtomicBoolean
     public static boolean found = false;
 
     public static void main(String[] args) {
@@ -13,7 +14,8 @@ public class FactorThread {
         BigInteger result = multiThreadFactor(n);
         BigInteger otherFactor = n.divide(result);
 
-        System.out.println("The two prime factors of the semiprime " + n + " are: " + result + " and " + otherFactor + ".");
+        System.out.println("The two prime factors of the semiprime " + n + " are: " + result
+                + " and " + otherFactor + ".");
     }
 
     public static BigInteger multiThreadFactor(BigInteger input) {
@@ -41,8 +43,7 @@ public class FactorThread {
         for (int i = 0; i < numberOfThreads; i++) {
             if (factors[i].getResult() != null) {
                 result = factors[i].getResult();
-            }
-            else {
+            } else {
                 factorThreads[i].interrupt();
             }
         }
@@ -50,6 +51,7 @@ public class FactorThread {
         return result;
     }
 }
+
 
 // Precondition: n is a semi-prime number.
 // Postcondition: the result is a prime factor of n.
@@ -74,7 +76,8 @@ class FactorizerWithInterrupt implements Runnable {
         final BigInteger zero = new BigInteger("0");
 
         while (this.start.compareTo(this.n) < 0) {
-            if (Thread.currentThread().isInterrupted()) break;
+            if (Thread.currentThread().isInterrupted())
+                break;
 
             if (this.n.remainder(this.start).compareTo(zero) == 0) {
                 this.result = this.start;
@@ -86,6 +89,6 @@ class FactorizerWithInterrupt implements Runnable {
         }
 
         // This should never be reached as it implies that an error occurs
-        assert(false);
+        assert (false);
     }
 }

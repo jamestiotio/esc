@@ -1,5 +1,8 @@
-public class Experiment {
+public class ExperimentFixed2 {
     private static int MY_INT = 0;
+    // More memory is needed to be allocated to create the lock, and in terms of time, each thread
+    // needs to wait until the lock is released before it can access it
+    private static Object lock = new Object();
 
     public static void main(String[] args) throws InterruptedException {
         new ChangeListener().start();
@@ -13,9 +16,11 @@ public class Experiment {
         public void run() {
             int local_value = MY_INT;
             while (local_value < 5) {
-                if (local_value != MY_INT) {
-                    System.out.println("Got Change for MY_INT : " + MY_INT);
-                    local_value = MY_INT;
+                synchronized (lock) {
+                    if (local_value != MY_INT) {
+                        System.out.println("Got Change for MY_INT : " + MY_INT);
+                        local_value = MY_INT;
+                    }
                 }
             }
         }
@@ -25,8 +30,10 @@ public class Experiment {
         public void run() {
             int local_value = MY_INT;
             while (MY_INT < 5) {
-                System.out.println("Incrementing MY_INT to " + (local_value + 1));
-                MY_INT = ++local_value;
+                synchronized (lock) {
+                    System.out.println("Incrementing MY_INT to " + (local_value + 1));
+                    MY_INT = ++local_value;
+                }
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {

@@ -13,6 +13,8 @@ public class Stack<E> {
     // or Stack<List<Integer>>. From Stack's point of view, however,
     // the element type is just E.
 
+    // The ArrayList implementation is not synchronized (not thread-safe) as mentioned in the
+    // official JDK documentation
     private final List<E> elems = new ArrayList<E>();
     // elems contains the elements in the stack,
     // in order from oldest pushed (elems[0]) to

@@ -14,8 +14,8 @@ class Worker extends Thread {
 
 public class MyStack {
     protected final int maxSize;
-    protected long[] stackArray;
-    protected int top;
+    protected long[] stackArray;    // guarded by "this"
+    protected int top;  //invariant: top < stackArray.length && top >= -1; guarded by "this"
 
     public MyStack(int s) {
         maxSize = s;

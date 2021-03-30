@@ -11,6 +11,9 @@ public class TransferFixed {
     }
 
     public void transferMoney(Account fromAccount, Account toAccount, int amount) throws Exception {
+        // Impose a fixed global sequence order by hashing the account IDs in which all threads will
+        // acquire the locks to prevent lock-ordering deadlocks (lock the account with a smaller
+        // hash value first)
         int fromHash = System.identityHashCode(fromAccount);
         int toHash = System.identityHashCode(toAccount);
 
@@ -27,6 +30,8 @@ public class TransferFixed {
                 }
             }
         } else {
+            // This prevents deadlock for the corner case when attempting/trying to transfer from
+            // and to the same account
             synchronized (tieLock) {
                 synchronized (fromAccount) {
                     synchronized (toAccount) {

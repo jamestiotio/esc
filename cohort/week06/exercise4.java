@@ -8,13 +8,12 @@ public class exercise4 {
         Thread.sleep(1000);
         Calendar cal2 = new CalendarSubclass();
         cal2.setTime(new Date());
-        System.out.println(cal2.after(cal1));
-        System.out.println(cal1.after(cal2));
-        System.out.println(cal1.after(cal1));
-        System.out.println(cal2.after(cal2));
+        System.out.println(cal2.after(cal1));   // True
+        System.out.println(cal1.after(cal2));   // False
+        System.out.println(cal1.after(cal1));   // True
+        System.out.println(cal2.after(cal2));   // True
     }
 }
-
 
 class CalendarSubclass extends Calendar {
     /**
@@ -22,16 +21,17 @@ class CalendarSubclass extends Calendar {
     */
     private static final long serialVersionUID = 1L;
 
+    Calendar calendar = Calendar.getInstance();
+
     @Override
     public boolean after(Object when) {
         if (when instanceof Calendar && super.compareTo((Calendar) when) == 0) {
-            // if (when instanceof Calendar && ((Calendar) when).toString().equals(this.toString()))
-            // {
+            // if (when instanceof Calendar && ((Calendar) when).toString().equals(this.toString())) {
             // if (when instanceof Calendar && equals((Calendar) when)) {
-            System.out.println("lala");
+            // System.out.println("lala");
             return true;
         }
-        return super.after(when);
+        return calendar.after(when);
     }
 
     @Override

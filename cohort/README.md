@@ -20,7 +20,7 @@ $ docker pull klee/klee:latest
 $ docker run --rm -it -u ${UID} -v ${PWD}:/klee --ulimit='stack=-1:-1' klee/klee
 ```
 
-> Do not accidentally overwrite the `/evosuite-bin` and the `/home/klee` directories, the `UID` and `PWD` POSIX environment variables are optional and interchangeable to specific desired values, and use double quotation marks instead of single quotation marks for certain argument/option/flag values if using Windows (or WSL-related products).
+> Do not accidentally overwrite the `/evosuite-bin` and the `/home/klee` directories since currently-existing host volumes/mounts will override the container's linked directories/files, the `UID` and `PWD` POSIX environment variables are optional and interchangeable to specific desired values, and use double quotation marks instead of single quotation marks for certain argument/option/flag values if using Windows (or WSL-related products).
 
 The Z3 Theorem Prover/Constraint Solver can be downloaded, built and installed by following the official instructions [here](https://github.com/Z3Prover/z3). Alternatively, an online editor is available and can be used on the `rise4fun` web service platform [here](https://rise4fun.com/z3).
 

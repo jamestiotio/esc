@@ -1,6 +1,8 @@
 #!/bin/bash
+# EvoSuite v1.1.0 is compatible with Java 9+ JDK, while EvoSuite v1.0.6 only provides support for Java 8 JDK (which has the presence of `tools.jar`)
+# Ensure that you have the appropriate correct JDK version and not just JRE
 
 # To run this script: ./run_evosuite Example .
 
 javac $1.java
-java -jar evosuite-1.1.0.jar -class $1 -projectCP $2
+java -jar evosuite-1.1.0.jar -generateSuite -Dalgorithm=MONOTONIC_GA -class $1 -projectCP $2

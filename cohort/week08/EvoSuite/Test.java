@@ -2,7 +2,6 @@ import java.util.List;
 
 import org.evosuite.EvoSuite;
 import org.evosuite.Properties;
-import org.evosuite.Properties.Algorithm;
 import org.evosuite.result.TestGenerationResult;
 
 public class Test {
@@ -10,11 +9,9 @@ public class Test {
     public void evosuite(String targetClass, String cp) {
         EvoSuite evo = new EvoSuite();
         Properties.TARGET_CLASS = targetClass;
-        Properties.ALGORITHM = Algorithm.MONOTONIC_GA;
-        Properties.TRACK_COVERED_GRADIENT_BRANCHES = true;
 
-        String[] command = new String[] {"-generateSuite", "-class", targetClass, "-projectCP", cp,
-                "-Dsearch_budget", "30"};
+        String[] command = new String[] {"-generateSuite", "-Dalgorithm", "MONOTONIC_GA", "-class",
+                targetClass, "-projectCP", cp};
 
         List<List<TestGenerationResult>> list =
                 (List<List<TestGenerationResult>>) evo.parseCommandLine(command);
@@ -23,11 +20,14 @@ public class Test {
                 System.out.println(r);
             }
         }
+
+        // Terminate JVM
+        System.exit(0);
     }
 
     public static void main(String[] args) {
         String targetClass = "Example";
-        String cp = "bin";
+        String cp = ".";
 
         Test t = new Test();
         t.evosuite(targetClass, cp);

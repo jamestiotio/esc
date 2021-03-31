@@ -8,9 +8,21 @@ In terms of the greybox and whitebox fuzzers, EvoSuite can be downloaded and ins
 
 > Unfortunately, this KLEE does not come with [explosives that go boom](https://genshin.mihoyo.com/en/character/mondstadt?char=8)... 😣
 
+Alternatively, the Docker images of EvoSuite and KLEE could also be pulled and used by running these commands:
+
+```console
+# EvoSuite
+$ docker pull evosuite/evosuite:latest-java-8
+$ docker run -it -u ${UID} -v ${PWD}:/evosuite --entrypoint=/bin/bash evosuite/evosuite:latest-java-8
+
+# KLEE
+$ docker pull klee/klee:latest
+$ docker run --rm -it -u ${UID} -v ${PWD}:/klee --ulimit='stack=-1:-1' klee/klee
+```
+
 The Z3 Theorem Prover/Constraint Solver can be downloaded, built and installed by following the official instructions [here](https://github.com/Z3Prover/z3). Alternatively, an online editor is available and can be used on the `rise4fun` web service platform [here](https://rise4fun.com/z3).
 
-Z3 can be run by using this command:
+Z3 can be run by using these commands:
 
 ```console
 $ z3 -smt2 *.smt2

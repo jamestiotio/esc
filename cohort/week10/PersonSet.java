@@ -1,11 +1,13 @@
 import java.util.HashSet;
 import java.util.Set;
 
-// this class is thread-safe.
+// This class is thread-safe due to encapsulation. mySet is thread-safe since the exposed public
+// methods are synchronized, while the mySet object itself is private and does not "participate" in
+// non-synchronized public methods or with other attributes with public scope.
 public class PersonSet {
     // @guarded by "this"
-    private final Set<Person> mySet = new HashSet<Person>();
-    // note that HashSet is not thread-safe!
+    private final Set<Person> mySet = new HashSet<>();
+    // Note that HashSet is not thread-safe! (as opposed to ConcurrentHashMap)
 
     public synchronized void addPerson(Person p) {
         mySet.add(p);

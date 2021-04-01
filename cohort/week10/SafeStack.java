@@ -6,7 +6,7 @@ import java.util.List;
  * type E). Elements can be pushed onto the stack, and then popped off in the reverse order that
  * they were pushed. A Stack can hold an arbitrary number of elements.
  */
-public class Stack<E> {
+public class SafeStack<E> {
     // Stack is a *generic* class, which means it takes a type parameter.
     // The type parameter E must be filled in with an object type
     // when using this class: e.g. Stack<String>, Stack<Double>,
@@ -15,7 +15,7 @@ public class Stack<E> {
 
     // The ArrayList implementation is not synchronized (not thread-safe) as mentioned in the
     // official JDK documentation
-    private final List<E> elems = new ArrayList<E>();
+    private final Stack<E> stack;
     // elems contains the elements in the stack,
     // in order from oldest pushed (elems[0]) to
     // to the latest item pushed, and the
@@ -25,8 +25,8 @@ public class Stack<E> {
     /**
      * Make a Stack, initially empty.
      */
-    public Stack() {
-        // Why isn't anything initialized here?
+    public SafeStack() {
+        this.stack = new Stack<>();
     }
 
     /**
@@ -34,8 +34,8 @@ public class Stack<E> {
      * 
      * @param e element to push on top the number of elements in elems is incremented by one
      */
-    public void push(E e) {
-        elems.add(e);
+    public synchronized void push(E e) {
+        this.stack.push(e);
     }
 
     /**
@@ -44,24 +44,26 @@ public class Stack<E> {
      * 
      * @return element on top of stack
      */
-    public E pop() {
-        final E e = elems.get(elems.size() - 1);
-        elems.remove(elems.size() - 1);
-        return e;
+    public synchronized E pop() {
+        return this.stack.pop();
     }
 
     /**
      * @return number of elements in the stack
      */
-    public int size() {
-        return elems.size();
+    public synchronized int size() {
+        return this.stack.size();
     }
 
-    public int capacity() {
-        return size();
+    public synchronized void pushIfNotFull(E e) {
+
     }
 
-    public boolean isEmpty() {
-        return false;
+    public synchronized E popIfNotEmpty() {
+        if (this.stack.size() <= 0) {
+            return null;
+        }
+
+        return this.stack.pop();
     }
 }

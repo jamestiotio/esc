@@ -4,11 +4,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+// The extra layers of synchronization create performance penalties (every function call increases the cost)
 public class ImprovedList<E> {
+    // This list is private since we will compose and provide thread-safe implementations for
+    // everyone else to access/modify this list (less fragile and much better than client-side
+    // locking, and it does not care whether list itself is thread-safe or not)
     private final List<E> list;
 
     public ImprovedList() {
-        this.list = new ArrayList<E>();
+        // The object is internally initialized and created here for composition (as compared to
+        // external for client-side locking)
+        this.list = new ArrayList<>();
     }
 
     public synchronized boolean putIfAbsent(E x) {

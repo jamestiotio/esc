@@ -3,5 +3,5 @@
 *.smt2
 *.ktest
 
-klee-last/
+klee-last
 klee-out-*

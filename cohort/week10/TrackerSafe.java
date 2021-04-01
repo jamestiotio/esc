@@ -1,10 +1,11 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.locks.ReentrantLock;
 
 class Updater extends Thread {
-    Tracker tracker;
+    TrackerSafe tracker;
 
-    public Updater(Tracker tra) {
+    public Updater(TrackerSafe tra) {
         this.tracker = tra;
     }
 
@@ -17,23 +18,23 @@ class Updater extends Thread {
 
 
 class Viewer extends Thread {
-    Tracker tracker;
+    TrackerSafe tracker;
 
-    public Viewer(Tracker tra) {
+    public Viewer(TrackerSafe tra) {
         this.tracker = tra;
     }
 
     @Override
     public void run() {
-        Tracker.MutablePoint loc = tracker.getLocation("somestring");
+        TrackerSafe.MutablePoint loc = tracker.getLocation("somestring");
         loc.x = -1212000;
     }
 }
 
 
 class Test {
-    Map<String, Tracker.MutablePoint> locations = new HashMap<>();
-    Tracker t = new Tracker(locations);
+    Map<String, TrackerSafe.MutablePoint> locations = new HashMap<>();
+    TrackerSafe t = new TrackerSafe(locations);
     Updater u = new Updater(t);
     Viewer v = new Viewer(t);
 
@@ -46,27 +47,36 @@ class Test {
 
 
 // is this class thread-safe?
-public class Tracker {
+public class TrackerSafe {
+    private ReentrantLock mutex = new ReentrantLock();
     // @guarded by ???
-    private final Map<String, MutablePoint> locations;
+    private static volatile Map<String, MutablePoint> locations;
 
     // the reference locations, is it going to be an escape?
-    public Tracker(Map<String, MutablePoint> locations) {
-        this.locations = locations;
+    public TrackerSafe(Map<String, MutablePoint> locations) {
+        mutex.lock();
+        TrackerSafe.locations = locations;
+        mutex.unlock();
     }
 
     // is this an escape?
     public Map<String, MutablePoint> getLocations() {
-        return locations;
+        mutex.lock();
+        Map<String, MutablePoint> map = TrackerSafe.locations;
+        mutex.unlock();
+        return map;
     }
 
     // is this an escape?
     public MutablePoint getLocation(String id) {
+        mutex.lock();
         MutablePoint loc = locations.get(id);
+        mutex.unlock();
         return loc;
     }
 
     public void setLocation(String id, int x, int y) {
+        mutex.lock();
         MutablePoint loc = locations.get(id);
 
         if (loc == null) {
@@ -75,6 +85,7 @@ public class Tracker {
 
         loc.x = x;
         loc.y = y;
+        mutex.unlock();
     }
 
     // this class is not thread-safe (why?) and keep it unmodified.

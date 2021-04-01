@@ -3,6 +3,8 @@ public class ExtendedPairWrong extends NewPair {
         super(x, y);
     }
 
+    // This is wrong since it is locked on different objects (class extension is fragile since it
+    // depends on the other class' specific implementation and access to its source code)
     public synchronized void increment() {
         incrementX();
         incrementY();

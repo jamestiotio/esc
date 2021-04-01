@@ -3,6 +3,8 @@ public class ExtendedPair extends Pair {
         super(x, y);
     }
 
+    // This is correct extension since the Pair class uses the synchronized keyword (i.e.,
+    // synchronized on the same object)
     public synchronized void incrementXY() {
         incrementX();
         incrementY();

@@ -15,7 +15,7 @@ public class XSSFixed {
         s = s.replaceAll("\\s+", "");
         // Normalize string before
         s = Normalizer.normalize(s, Form.NFKC);
-        Pattern pattern = Pattern.compile("<script>"); // This might not catch uppercase SCRIPT
+        Pattern pattern = Pattern.compile("<script>", Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(s);
         if (matcher.find()) {
             System.out.println("blacklisted tag");

@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -8,6 +7,7 @@ public class ShootTheAccount {
     private int balance = 0;
     private List<Transaction> ListOfAllTransactions = new ArrayList<Transaction>();
     private String lastDebitTime;
+    private String lastCreditTime;
 
     public ShootTheAccount() {
     }
@@ -16,7 +16,7 @@ public class ShootTheAccount {
         this.balance = balance;
     }
 
-    public void deposite(int amount) {
+    public void deposit(int amount) {
         balance += amount;
     }
 
@@ -28,10 +28,8 @@ public class ShootTheAccount {
         return balance;
     }
 
-
     // this method has a long method smell
     public void DebitTransaction(int amount) {
-
         if (balance >= 500) {
             // reduce the amount
             balance = balance - amount;
@@ -48,8 +46,24 @@ public class ShootTheAccount {
     }
 
     // this method has a long method smell
-    public void Transfer(int amount, ShootTheAccount Benf) {
+    public void CreditTransaction(int amount) {
+        if (balance >= 500) {
+            // increase the amount
+            balance = balance + amount;
 
+            // add to the transaction list
+            ListOfAllTransactions.add(new Transaction("credit", amount));
+
+            // update the last credit date
+            Calendar cal = Calendar.getInstance();
+
+            lastCreditTime = cal.get(Calendar.DATE) + "." + cal.get(Calendar.MONTH) + "."
+                    + cal.get(Calendar.YEAR);
+        }
+    }
+
+    // this method has a long method smell
+    public void Transfer(int amount, ShootTheAccount Benf) {
         if (balance >= 500) {
             // reduce the amount
             balance = balance - amount;

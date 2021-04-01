@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -8,7 +7,8 @@ public class ShootTheAccountPlus {
     private int balance = 0;
     private List<Transaction> ListOfAllTransactions = new ArrayList<Transaction>();
     private String lastDebitTime;
-    private String type;
+    private String lastCreditTime;
+    private String type;    // "personal" or "business"
 
     public ShootTheAccountPlus() {
     }
@@ -33,39 +33,55 @@ public class ShootTheAccountPlus {
         return (balance >= 500 || !type.equals("personal"));
     }
 
-    // this method has a long method smell
-    public void DebitTransaction(int amount) {
+    // update transaction list
+    private void updateTransactionList(String type, int amount) {
+        // add to the transaction list
+        ListOfAllTransactions.add(new Transaction(type, amount));
+    }
 
-        if (check()) {
-            // reduce the amount
-            balance = balance - amount;
+    // log last transaction time
+    private void logLatestTransactionTime(String type) {
+        Calendar cal = Calendar.getInstance();
 
-            // add to the transaction list
-            ListOfAllTransactions.add(new Transaction("debit", amount));
-
-            // update the last debit date
-            Calendar cal = Calendar.getInstance();
-
+        if (type.equals("debit"))
             lastDebitTime = cal.get(Calendar.DATE) + "." + cal.get(Calendar.MONTH) + "."
                     + cal.get(Calendar.YEAR);
+        else if (type.equals("credit"))
+            lastCreditTime = cal.get(Calendar.DATE) + "." + cal.get(Calendar.MONTH) + "."
+                    + cal.get(Calendar.YEAR);
+        else
+            System.out.println("Unsupported");
+    }
+
+    public void DebitTransaction(int amount) {
+        if (check()) {
+            // reduce the amount
+            deposit(-amount);
+
+            // add to the transaction list
+            updateTransactionList("debit", amount);
+
+            // update the last debit date
+            logLatestTransactionTime("debit");
         }
     }
 
-    // this method has a long method smell
-    public void Transfer(int amount, ShootTheAccount Benf) {
-
+    public void CreditTransaction(int amount) {
         if (check()) {
-            // reduce the amount
-            balance = balance - amount;
+            // increase the amount
+            deposit(amount);
 
             // add to the transaction list
-            ListOfAllTransactions.add(new Transaction("debit", amount));
+            updateTransactionList("credit", amount);
 
-            // update the last debit date
-            Calendar cal = Calendar.getInstance();
+            // update the last credit date
+            logLatestTransactionTime("credit");
+        }
+    }
 
-            lastDebitTime = cal.get(Calendar.DATE) + "." + cal.get(Calendar.MONTH) + "."
-                    + cal.get(Calendar.YEAR);
+    public void Transfer(int amount, ShootTheAccountPlus Benf) {
+        if (check()) {
+            this.DebitTransaction(amount);
 
             Benf.CreditTransaction(amount);
         }

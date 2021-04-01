@@ -9,7 +9,7 @@ public class Disk {
 
     // (x, y) = {(4, 11), (1001, -2), (4, 13)} should have 100% statement coverage, 100% branch
     // coverage and 100% path coverage (as well as condition coverage since condition coverage ==
-    // branch coverage when each conditional statement has only one condition)
+    // branch coverage when each conditional statement has only one condition/is atomic)
     // Condition coverage is separate from the rest
     public void manipulate() {
         int threshold = 1000;

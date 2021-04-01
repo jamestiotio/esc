@@ -26,7 +26,7 @@ public class AccountSmell {
         this.balance = balance;
     }
 
-    public void deposite(int amount) {
+    public void deposit(int amount) {
         balance += amount;
     }
 

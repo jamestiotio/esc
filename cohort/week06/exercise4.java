@@ -23,6 +23,10 @@ class CalendarSubclass extends Calendar {
 
     Calendar calendar = Calendar.getInstance();
 
+    public int getDayOfYear() {
+        return calendar.get(Calendar.DAY_OF_YEAR);
+    }
+
     @Override
     public boolean after(Object when) {
         if (when instanceof Calendar && super.compareTo((Calendar) when) == 0) {

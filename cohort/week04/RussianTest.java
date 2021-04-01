@@ -55,6 +55,16 @@ public class RussianTest {
         assertEquals(18, Russian.multiply(3, 6));
     }
 
+    @Test
+    public void whiteBoxTest5() {
+        assertEquals(35, Russian.multiply(5, 7));
+    }
+
+    @Test
+    public void whiteBoxTest6() {
+        assertEquals(1414416, Russian.multiply(237, 5968));
+    }
+
     // This test will fail (cannot handle a negative value of n)
     @Test
     public void faultBasedTest1() {

@@ -13,8 +13,17 @@ public class Test {
         String[] command = new String[] {"-generateSuite", "-Dalgorithm", "MONOTONIC_GA", "-class",
                 targetClass, "-projectCP", cp};
 
+        long startTime = System.nanoTime();
+
         List<List<TestGenerationResult>> list =
                 (List<List<TestGenerationResult>>) evo.parseCommandLine(command);
+
+        long endTime = System.nanoTime();
+
+        long duration = (endTime - startTime) / 1000000;
+
+        System.out.println("Generating tests for the " + targetClass + " class takes " + duration + " milliseconds.");
+
         for (List<TestGenerationResult> l : list) {
             for (TestGenerationResult r : l) {
                 System.out.println(r);

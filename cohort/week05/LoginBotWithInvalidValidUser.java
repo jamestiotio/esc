@@ -15,11 +15,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginBotWithInvalidValidUser {
-    // Only the last final entries of both arrays are valid
-    private static String[] usernames = {"", "su@mymail.sutd.edu.sg", "su@@sutd.edu.sg",
-            "esc@istd50/?10.3", "escistd50.003", "escistd50.003"};
+    // Only the last final entries of both arrays are the valid pair
+    private static String[] usernames =
+            {"", "su@mymail.sutd.edu.sg", "su@@sutd.edu.sg", "esc@istd50/?10.3", "escistd50.003",
+                    "escistd50.003", "SUTD@Singapore", "escistd50.003"};
     private static String[] passwords = {"", "Some Password with Whitespaces",
-            "aaaaaaaaaaaaaaaaaaaaaaa", "$$6**@I.do.not.know", "wrong_password", "SUTD@Singapore"};
+            "aaaaaaaaaaaaaaaaaaaaaaa", "$$6**@I.do.not.know", "wrong_password",
+            "password_in_email_format@mymail.sutd.edu.sg", "escistd50.003", "SUTD@Singapore"};
 
     @Test
     public void testInvalidInputs() throws InterruptedException {
@@ -56,6 +58,9 @@ public class LoginBotWithInvalidValidUser {
                 System.out.println("login/password name invalid");
             }
         }
+
+        // Invoke quit() instead of close() for a proper and safe closure
+        driver.quit();
     }
 
     @Test
@@ -90,5 +95,8 @@ public class LoginBotWithInvalidValidUser {
             System.out.println("login/password name invalid");
             fail("NoSuchElementException should not have been raised.");
         }
+
+        // Invoke quit() instead of close() for a proper and safe closure
+        driver.quit();
     }
 }

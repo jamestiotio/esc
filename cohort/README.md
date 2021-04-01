@@ -30,3 +30,5 @@ Z3 can be run by using these commands:
 $ z3 -smt2 *.smt2
 $ z3 *.z3
 ```
+
+To get the satisfiability model from Z3, add `(get-model)` after the `(check-sat)` lines for the satisfiable cases in the corresponding `.smt2` files.

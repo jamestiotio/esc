@@ -9,8 +9,8 @@ public class FactorThread {
     public static volatile boolean stop = false;
 
     public static void main(String[] args) {
-        // Define desired semiprime to be factorized (other non-prime positive integers could
-        // technically also be factorized, but only to their first found two factors)
+        // Define desired semiprime to be factorized (other non-prime positive composite integers
+        // could technically also be factorized, but only to their first found two factors)
         final BigInteger n = new BigInteger("1127451830576035879");
 
         if (n.compareTo(new BigInteger("1")) <= 0) {
@@ -89,7 +89,7 @@ class FactorizerWithInterrupt implements Runnable {
     public void factor() {
         final BigInteger zero = new BigInteger("0");
 
-        while (this.start.compareTo(this.n) < 0) {
+        while (this.start.compareTo(this.n.sqrt()) <= 0) {
             if (Thread.currentThread().isInterrupted())
                 break;
 

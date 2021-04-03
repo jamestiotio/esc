@@ -3,47 +3,61 @@ import java.math.BigInteger;
 public class FactorThread {
     // Define desired thread count/number of threads (time complexity: O(n/k), where k is the number
     // of threads)
-    public static final int numberOfThreads = 8;
-    // There is no need to declare this as a variable of type AtomicBoolean
-    public static boolean found = false;
+    public static final int NUMBER_OF_THREADS = 16;
+    // There is no need to declare these as variables of type AtomicBoolean
+    public static volatile boolean found = false;
+    public static volatile boolean stop = false;
 
     public static void main(String[] args) {
-        // Define desired semiprime to be factorized
-        final BigInteger n = new BigInteger("4294967297");
+        // Define desired semiprime to be factorized (other non-prime positive integers could
+        // technically also be factorized, but only to their first found two factors)
+        final BigInteger n = new BigInteger("1127451830576035879");
+
+        if (n.compareTo(new BigInteger("1")) <= 0) {
+            System.out.println("Invalid input!");
+            System.exit(1);
+        }
 
         BigInteger result = multiThreadFactor(n);
+
+        if (result == null) {
+            System.out.println("The specified integer is a prime, not a semiprime!");
+            System.exit(1);
+        }
+
         BigInteger otherFactor = n.divide(result);
 
-        System.out.println("The two prime factors of the semiprime " + n + " are: " + result
-                + " and " + otherFactor + ".");
+        System.out.println("Two factors of " + n + " are: " + result + " and " + otherFactor + ".");
     }
 
     public static BigInteger multiThreadFactor(BigInteger input) {
         // Create array of factorizers
-        final FactorizerWithInterrupt[] factors = new FactorizerWithInterrupt[numberOfThreads];
+        final FactorizerWithInterrupt[] factors = new FactorizerWithInterrupt[NUMBER_OF_THREADS];
 
         // Create array of threads
-        final Thread[] factorThreads = new Thread[numberOfThreads];
+        final Thread[] factorThreads = new Thread[NUMBER_OF_THREADS];
 
         // Assign values to each thread and start them
-        for (int i = 0; i < numberOfThreads; i++) {
+        for (int i = 0; i < NUMBER_OF_THREADS; i++) {
             // We start from 2 (since 2 is the smallest prime integer)
-            factors[i] = new FactorizerWithInterrupt(input, i + 2, numberOfThreads);
+            factors[i] = new FactorizerWithInterrupt(input, i + 2, NUMBER_OF_THREADS);
             factorThreads[i] = new Thread(factors[i]);
+            System.out.println("Starting thread " + (i + 1) + "...");
             factorThreads[i].start();
         }
 
-        while (!found) {
+        while (!found && !stop) {
             // Busy waits and do nothing while waiting for other threads to find the answer/solution
         }
 
         BigInteger result = null;
 
         // Wait for any thread to finish and print the result
-        for (int i = 0; i < numberOfThreads; i++) {
+        for (int i = 0; i < NUMBER_OF_THREADS; i++) {
             if (factors[i].getResult() != null) {
                 result = factors[i].getResult();
             } else {
+                System.out.println("Interrupting thread " + (i + 1) + "...");
                 factorThreads[i].interrupt();
             }
         }
@@ -81,6 +95,7 @@ class FactorizerWithInterrupt implements Runnable {
 
             if (this.n.remainder(this.start).compareTo(zero) == 0) {
                 this.result = this.start;
+                System.out.println("A factor is found!");
                 FactorThread.found = true;
                 break;
             }
@@ -88,7 +103,6 @@ class FactorizerWithInterrupt implements Runnable {
             this.start = this.start.add(this.step);
         }
 
-        // This should never be reached as it implies that an error occurs
-        assert (false);
+        FactorThread.stop = true;
     }
 }

@@ -2,25 +2,27 @@
  * Question of Cohort Exercise 1
  */
 
-// we must ensure this class to be thread-safe. why?
+// We must ensure this class to be thread-safe. Why and how?
 public class MyCyclicBarrier {
+    private final int parties;
     private int count = 0;
-    private Runnable torun;
-    private int initial = 0;
+    private Runnable torun; // When should we call this runnable task?
 
     public MyCyclicBarrier(int count, Runnable torun) {
         this.count = count;
-        this.initial = count;
+        this.parties = count;
         this.torun = torun;
     }
 
     public MyCyclicBarrier(int count) {
         this.count = count;
-        this.initial = count;
+        this.parties = count;
     }
 
     // TODO: complete the implementation below.
     // hint: use wait(), notifyAll()
+    // Precondition: 
+    // Postcondition: 
     public synchronized void await() {
         try {
             this.count--;
@@ -29,7 +31,7 @@ public class MyCyclicBarrier {
             } else {
                 this.notifyAll();
                 if (this.torun != null) this.torun.run();
-                this.count = this.initial;
+                this.count = this.parties;
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

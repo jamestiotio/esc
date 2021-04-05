@@ -9,7 +9,7 @@ public class CountDownLatchExerciseQns {
         int limit = 7;
         final int noOfSearcher = 4;
         final CountDownLatch latch = new CountDownLatch(limit); // This is used as the recorder/ledger.
-        final CountDownLatch finish = new CountDownLatch(limit);    // This is used as the sequence controller.
+        final CountDownLatch finish = new CountDownLatch(noOfSearcher); // This is used as the sequence controller.
         String[] array = new String[] {"A", "B", "F", "D", "A", "B", "F", "D", "A", "B", "F", "D",
                 "A", "B", "F", "D", "A", "B", "F", "D", "A", "B", "F", "D", "F", "F"};
 
@@ -33,9 +33,11 @@ public class CountDownLatchExerciseQns {
                     e.printStackTrace();
                 } // Main thread is waiting on CountDownLatch to finish
 
+                // Force all searchers to stop now.
                 for (int i = 0; i < noOfSearcher; i++) {
                     searchers[i].interrupt();
                 }
+                // Force all searchers to stop now.
                 while (finish.getCount() > 0) {
                     finish.countDown();
                 }

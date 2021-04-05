@@ -49,6 +49,7 @@ class Service implements Runnable {
             e.printStackTrace();
         }
 
+        // Decrements the count of the latch, releasing all waiting threads if the count reaches zero.
         latch.countDown(); // reduce count of CountDownLatch by 1
         System.out.println(name + " has passed countdown once");
 

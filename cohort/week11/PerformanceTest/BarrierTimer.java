@@ -1,3 +1,5 @@
+package PerformanceTest;
+
 public class BarrierTimer implements Runnable {
     private boolean started;
     private long startTime, endTime;

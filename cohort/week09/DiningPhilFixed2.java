@@ -44,7 +44,7 @@ class Philosopher2 extends Thread {
                 left.pickup();
                 System.out.println("Phil " + index + " picks up left fork.");
                 System.out.println("Phil " + index + " tries to lock right.");
-                // The random wait will ensure no live deadlock
+                // The random wait will ensure no live deadlock/livelock
                 boolean lockRight =
                         right.lock.tryLock(randomGenerator.nextInt(1000), TimeUnit.MILLISECONDS);
                 if (lockRight) {

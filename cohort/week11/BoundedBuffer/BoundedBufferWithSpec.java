@@ -28,7 +28,7 @@ public class BoundedBufferWithSpec<E> {
         return availableSpaces.availablePermits() == 0;
     }
 
-    // pre-condition: items is not null & availableSpace> 0
+    // pre-condition: items is not null & availableSpace > 0
     public void put(E x) throws InterruptedException {
         availableSpaces.acquire();
         doInsert(x);

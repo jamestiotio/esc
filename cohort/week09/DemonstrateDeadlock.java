@@ -44,6 +44,12 @@ class TransferThread extends Thread {
                     System.out.println("Insufficient Fund");
                 } else {
                     from.debit(amount);
+                    // A possible point to generate more scheduling
+                    /*
+                    if ((new Random()).nextInt(1000) > THREADHOLD) {
+                        Thread.yield();
+                    }
+                    */
                     to.credit(amount);
                 }
             }

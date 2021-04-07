@@ -9,7 +9,7 @@ public class quiz3 {
     static double mean, median;
     static int[] sortedInputs;
 
-    // Modified implementation from original question (only add non-negative integers)
+    // Slightly modified implementation from original question (only add non-negative integers)
     public static void populateInput() {
         for (int i = 0; i < n; i++) {
             inputs[i] = new SecureRandom().nextInt(n);
@@ -93,7 +93,7 @@ public class quiz3 {
 }
 
 
-// Sum all the randomly-generated positive integers in the input array
+// Sum all the randomly-generated non-negative integers in the input array
 class Summer implements Runnable {
     private int[] inputs;
     private int start, step, result;
@@ -180,9 +180,9 @@ class BottomUpMergeSort implements Runnable {
             int mid = (from + to) / 2;
 
             // Sort the first and second half
-            mergeSort(result, from, mid);
-            mergeSort(result, mid + 1, to);
-            merge(result, from, mid, to);
+            this.mergeSort(result, from, mid);
+            this.mergeSort(result, mid + 1, to);
+            this.merge(result, from, mid, to);
         }
     }
 

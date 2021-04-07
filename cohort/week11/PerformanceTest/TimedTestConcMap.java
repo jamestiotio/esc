@@ -11,7 +11,8 @@ public class TimedTestConcMap extends AddRemoveTest {
     private BarrierTimer timer = new BarrierTimer();
 
     /**
-     * You need to modify this constructor as well.
+     * TODO
+     * You can modify this constructor as well.
      * 
      * @param nPairThreads
      * @param trials

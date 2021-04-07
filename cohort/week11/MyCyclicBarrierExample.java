@@ -1,8 +1,8 @@
+import java.util.concurrent.CyclicBarrier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MyCyclicBarrierExample {
-
     private static class Task implements Runnable {
         private MyCyclicBarrier barrier;
 

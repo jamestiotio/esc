@@ -6,8 +6,8 @@ public class LockStaticVariablesFixed {
     public static int saving = 5000;
     public static int cash = 0;
 
-    // ReentrantLock is almost always better than a synchronized block (more tools/utilities for the
-    // belt)
+    // ReentrantLock is almost always better than a synchronized block on some object (more
+    // tools/utilities for the belt)
     public static final ReentrantLock lock = new ReentrantLock();
 
     public static void main(String args[]) {

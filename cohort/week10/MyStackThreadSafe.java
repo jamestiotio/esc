@@ -35,6 +35,8 @@ public class MyStackThreadSafe extends MyStack {
 
         toReturn = stackArray[top--];
         notifyAll();
+
+        assert(top >= -1);
         return toReturn;
     }
 

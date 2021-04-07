@@ -11,7 +11,6 @@ import static org.junit.Assert.fail;
 /**
  * Question for Cohort Exercise 3.
  */
-
 public class BoundedBufferTest {
     private static final long LOCKUP_DETECT_TIMEOUT = 1000;
 
@@ -52,8 +51,8 @@ public class BoundedBufferTest {
     }
 
     /**
-     * TODO: implement this test Initialize a buffer with #items inside. Initialize multiple threads
-     * that concurrently removes item from the buffer. Make sure the total remove() = #items in
+     * TODO: implement this test. Initialize a buffer with #items inside. Initialize multiple threads
+     * that concurrently remove items from the buffer. Make sure the total remove() = #items in
      * buffer. What should be the postcondition?
      */
     @Test
@@ -91,8 +90,8 @@ public class BoundedBufferTest {
     }
 
     /**
-     * TODO: implement this test Initialize a buffer with 0 item inside. Initialize a threads
-     * removes item from the buffer. What should be the postcondition?
+     * TODO: implement this test. Initialize a buffer with 0 item inside. Initialize multiple threads
+     * that concurrently attempt to remove items from the buffer. What should be the postcondition?
      */
     @Test
     public void testTakeBlocksWhenEmpty() {
@@ -119,7 +118,7 @@ public class BoundedBufferTest {
 
         for (int i = 0; i < numOfThreads; i++) {
             try {
-                threads[i].join(this.LOCKUP_DETECT_TIMEOUT);
+                threads[i].join(LOCKUP_DETECT_TIMEOUT);
             } catch (InterruptedException e) {
                 fail();
             }

@@ -32,7 +32,7 @@ public class SafeStack<E> {
     /**
      * Modifies this stack by pushing an element onto it.
      * 
-     * @param e element to push on top the number of elements in elems is incremented by one
+     * @param e element to push on top; the number of elements in elems is incremented by one
      */
     public synchronized void push(E e) {
         this.stack.push(e);
@@ -55,12 +55,26 @@ public class SafeStack<E> {
         return this.stack.size();
     }
 
+    /**
+     * Modifies this stack by pushing an element onto it, only if the stack is not full. Else, no
+     * changes are made to the stack.
+     * 
+     * @param e element to push on top; the number of elements in elems is incremented by one
+     */
     public synchronized void pushIfNotFull(E e) {
-
+        if (!this.stack.isFull()) {
+            this.stack.push(e);
+        }
     }
 
+    /**
+     * Modifies this stack by popping off the top element, only if the stack is not empty. Else,
+     * return null.
+     * 
+     * @return element on top of stack or null
+     */
     public synchronized E popIfNotEmpty() {
-        if (this.stack.size() <= 0) {
+        if (this.stack.isEmpty()) {
             return null;
         }
 

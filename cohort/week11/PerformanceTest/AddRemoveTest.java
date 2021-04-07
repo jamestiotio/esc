@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CyclicBarrier;
 
+/**
+ * You can modify this class as well.
+ */
 public class AddRemoveTest {
     protected CyclicBarrier barrier;
     protected Map<Integer, Integer> map;

@@ -7,20 +7,18 @@ import java.util.List;
  * they were pushed. A Stack can hold an arbitrary number of elements.
  */
 public class Stack<E> {
-    // Stack is a *generic* class, which means it takes a type parameter.
-    // The type parameter E must be filled in with an object type
-    // when using this class: e.g. Stack<String>, Stack<Double>,
-    // or Stack<List<Integer>>. From Stack's point of view, however,
-    // the element type is just E.
+    // Stack is a *generic* class, which means it takes a type parameter. The type parameter E must
+    // be filled in with an object type when using this class: e.g. Stack<String>, Stack<Double>, or
+    // Stack<List<Integer>>. From Stack's point of view, however, the element type is just E.
+
+    private final int Max = 10;
 
     // The ArrayList implementation is not synchronized (not thread-safe) as mentioned in the
     // official JDK documentation
     private final List<E> elems = new ArrayList<E>();
-    // elems contains the elements in the stack,
-    // in order from oldest pushed (elems[0]) to
-    // to the latest item pushed, and the
-    // next to be popped (elems[size-1]).
-    // If elems.size == 0, then the stack is empty.
+    // elems contains the elements in the stack, in order from oldest pushed (elems[0]) to the
+    // latest item pushed, and the next to be popped (elems[size-1]). If elems.size == 0, then the
+    // stack is empty.
 
     /**
      * Make a Stack, initially empty.
@@ -58,10 +56,14 @@ public class Stack<E> {
     }
 
     public int capacity() {
-        return size();
+        return Max;
     }
 
     public boolean isEmpty() {
-        return false;
+        return size() == 0;
+    }
+
+    public boolean isFull() {
+        return size() == capacity();
     }
 }

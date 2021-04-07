@@ -128,7 +128,8 @@ class BottomUpMergeSort implements Runnable {
     private int numberOfThreads;
 
     public BottomUpMergeSort(int[] inputs, int numberOfThreads) {
-        this.result = inputs;
+        this.result = inputs.clone(); // We can do this since int is primitive (deep copy is not
+                                      // needed/required)
         this.numberOfThreads = numberOfThreads;
     }
 

@@ -10,8 +10,11 @@ class Updater extends Thread {
 
     @Override
     public void run() {
-        tracker.setLocation("somestring", Integer.parseInt(String.valueOf(currentThread().getId())),
-                Integer.parseInt(String.valueOf(currentThread().getId())));
+        for (int i = 0; i < 100; i++) {
+            tracker.setLocation(String.valueOf(i),
+                    Integer.parseInt(String.valueOf(currentThread().getId())),
+                    Integer.parseInt(String.valueOf(currentThread().getId())));
+        }
     }
 }
 
@@ -25,23 +28,27 @@ class Viewer extends Thread {
 
     @Override
     public void run() {
-        Tracker.MutablePoint loc = tracker.getLocation("somestring");
-        loc.x = -1212000;
+        for (int i = 0; i < 100; i++) {
+            Tracker.MutablePoint loc = tracker.getLocation(String.valueOf(i));
+            loc.x = -1212000;
+        }
     }
 }
 
 
 class Test {
-    Map<String, Tracker.MutablePoint> locations = new HashMap<>();
-    Tracker t = new Tracker(locations);
-    Updater u = new Updater(t);
-    Viewer v = new Viewer(t);
+    public static void main(String[] args) throws InterruptedException {
+        Map<String, Tracker.MutablePoint> locations = new HashMap<>();
+        Tracker t = new Tracker(locations);
+        Updater u = new Updater(t);
+        Viewer v = new Viewer(t);
 
-    u.start();
-    v.start();
+        u.start();
+        v.start();
 
-    u.join();
-    v.join();
+        u.join();
+        v.join();
+    }
 }
 
 

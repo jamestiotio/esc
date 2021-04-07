@@ -19,7 +19,7 @@ public class MyStackThreadSafeComplete extends MyStack {
         super(s); // The "synchronized" keyword is illegal and not allowed for constructors
     }
 
-    // pre-condition: top < stackArray.length
+    // pre-condition: top < maxSize
     // post-condition: new element is inserted and added/allocated as the new top
     public synchronized void push(long j) {
         while (isFull()) {
@@ -51,6 +51,8 @@ public class MyStackThreadSafeComplete extends MyStack {
 
         toReturn = stackArray[top--];
         notifyAll(); // notify all other threads that the state has changed
+
+        assert(top >= -1);
         return toReturn;
     }
 

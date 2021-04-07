@@ -1,17 +1,16 @@
-import java.util.concurrent.atomic.AtomicInteger;
-
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.Map;
 import java.util.HashMap;
 
 public class LockStaticVariablesFixed {
-    public static AtomicInteger saving = new AtomicInteger(5000);
-    public static AtomicInteger cash = new AtomicInteger(0);
+    public static int saving = 5000;
+    public static int cash = 0;
 
-    public static Map<String, AtomicInteger> assets = new HashMap<>();
+    // ReentrantLock is almost always better than a synchronized block (more tools/utilities for the
+    // belt)
+    public static final ReentrantLock lock = new ReentrantLock();
 
     public static void main(String args[]) {
-        assets.put("saving", new AtomicInteger(5000));
-        assets.put("cash", new AtomicInteger(0));
         int numberofThreads = 10000;
         WD2[] threads = new WD2[numberofThreads];
 
@@ -28,28 +27,25 @@ public class LockStaticVariablesFixed {
             System.out.println("some thread is not finished");
         }
 
-        System.out
-                .print("The result is: " + LockStaticVariablesFixed.assets.get("cash").intValue());
+        System.out.print("The result is: " + LockStaticVariablesFixed.cash);
     }
 }
 
 
 class WD2 extends Thread {
     public void run() {
-        synchronized (LockStaticVariablesFixed.assets) {
-            if (LockStaticVariablesFixed.assets.get("saving").intValue() >= 1000) {
-                try {
-                    System.out.println("I am doing something.");
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                // Only 5 threads will be able to make the necessary modifications
-                LockStaticVariablesFixed.assets.put("saving", new AtomicInteger(
-                        LockStaticVariablesFixed.assets.get("saving").intValue() - 1000));
-                LockStaticVariablesFixed.assets.put("cash", new AtomicInteger(
-                        LockStaticVariablesFixed.assets.get("cash").intValue() + 1000));
+        LockStaticVariablesFixed.lock.lock();
+        if (LockStaticVariablesFixed.saving >= 1000) {
+            try {
+                System.out.println("I am doing something.");
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+            // Only 5 threads will be able to make the necessary modifications
+            LockStaticVariablesFixed.saving = LockStaticVariablesFixed.saving - 1000;
+            LockStaticVariables.cash = LockStaticVariables.cash + 1000;
         }
+        LockStaticVariablesFixed.lock.unlock();
     }
 }

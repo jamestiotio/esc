@@ -1,5 +1,7 @@
 import java.util.Random;
 
+// Impose and apply a global ordering of picking up forks: N-1, ..., 2, 1, 0 to ensure that none of the
+// philosophers will try to grab the same forks with the same hands
 public class DiningPhilFixed1 {
     private static int N = 5;
 
@@ -34,10 +36,22 @@ class Philosopher1 extends Thread {
         Random randomGenerator = new Random();
         try {
             while (true) {
-                // This even-odd global ordering will ensure that none of the philosophers will try
-                // to grab the same forks with the same hands
-                if (index % 2 == 0) {
-                    // Even-numbered philosophers grab left then right
+                if (index == 0) {
+                    // First philosopher grabs right then left
+                    Thread.sleep(randomGenerator.nextInt(100)); // not sleeping but thinking
+                    System.out.println("Phil " + index + " finishes thinking.");
+                    right.pickup();
+                    System.out.println("Phil " + index + " picks up right fork.");
+                    left.pickup();
+                    System.out.println("Phil " + index + " picks up left fork.");
+                    Thread.sleep(randomGenerator.nextInt(100)); // eating
+                    System.out.println("Phil " + index + " finishes eating.");
+                    right.putdown();
+                    System.out.println("Phil " + index + " puts down right fork.");
+                    left.putdown();
+                    System.out.println("Phil " + index + " puts down left fork.");
+                } else {
+                    // Other philosophers follow the same old rule of grabbing left first then right
                     Thread.sleep(randomGenerator.nextInt(100)); // not sleeping but thinking
                     System.out.println("Phil " + index + " finishes thinking.");
                     left.pickup();
@@ -50,19 +64,6 @@ class Philosopher1 extends Thread {
                     System.out.println("Phil " + index + " puts down left fork.");
                     right.putdown();
                     System.out.println("Phil " + index + " puts down right fork.");
-                } else {
-                    // Odd-numbered philosophers grab right then left
-                    Thread.sleep(randomGenerator.nextInt(100)); // not sleeping but thinking
-                    System.out.println("Phil " + index + " finishes thinking.");
-                    right.pickup();
-                    System.out.println("Phil " + index + " picks up right fork.");
-                    left.pickup();
-                    System.out.println("Phil " + index + " picks up left fork.");
-                    Thread.sleep(randomGenerator.nextInt(100)); // eating
-                    right.putdown();
-                    System.out.println("Phil " + index + " puts down right fork.");
-                    left.putdown();
-                    System.out.println("Phil " + index + " puts down left fork.");
                 }
             }
         } catch (InterruptedException e) {

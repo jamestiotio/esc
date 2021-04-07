@@ -2,6 +2,7 @@ import java.util.Random;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.TimeUnit;
 
+// Use a timed tryLock
 public class DiningPhilFixed2 {
     private static int N = 5;
 

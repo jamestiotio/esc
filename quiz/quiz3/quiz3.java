@@ -6,9 +6,8 @@ public class quiz3 {
     static int sum = 0;
     static int[] inputs = new int[n];
     final static int k = 16; // Number of threads
-    static double mean;
+    static double mean, median;
     static int[] sortedInputs;
-    static double median;
 
     // Modified implementation from original question (only add non-negative integers)
     public static void populateInput() {

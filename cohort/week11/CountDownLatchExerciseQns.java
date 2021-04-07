@@ -153,16 +153,18 @@ class Searcher extends Thread {
                 break;
             }
 
-            else if (latch.getCount() == 0) {
+            // Do be aware that getCount() is volatile but not synchronized (this is put here to
+            // prevent more Fs than what is necessary to be discovered/found)
+            else if (this.latch.getCount() == 0) {
                 this.interrupt();
             }
 
             else if (this.data[i].equalsIgnoreCase("F")) {
-                latch.countDown();
+                this.latch.countDown();
                 System.out.println("An F is found at position " + i + ".");
             }
         }
 
-        finish.countDown();
+        this.finish.countDown();
     }
 }

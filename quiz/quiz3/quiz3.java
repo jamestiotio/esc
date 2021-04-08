@@ -211,19 +211,21 @@ class BottomUpMergeSort implements Runnable {
         }
 
         // Note that only one of the two while loops below will be executed
-
-        // Copy any remaining entries of the first half
-        while (a <= mid) {
-            x[j] = result[a];
-            a++;
-            j++;
+        if (a <= mid) {
+            // Copy any remaining entries of the first half
+            while (a <= mid) {
+                x[j] = result[a];
+                a++;
+                j++;
+            }
         }
-
-        // Copy any remaining entries of the second half
-        while (b <= to) {
-            x[j] = result[b];
-            b++;
-            j++;
+        else if (b <= to) {
+            // Copy any remaining entries of the second half
+            while (b <= to) {
+                x[j] = result[b];
+                b++;
+                j++;
+            }
         }
 
         // Copy back from the temporary array

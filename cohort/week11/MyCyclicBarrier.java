@@ -21,9 +21,9 @@ public class MyCyclicBarrier {
 
     // TODO: complete the implementation below.
     // hint: use wait(), notifyAll()
-    // Precondition: All threads in the party has arrived at the barrier, before any threads are
+    // Precondition: All threads in the party have arrived at the barrier, before any threads are
     // released.
-    // Postcondition: The specified Runnable command is run once.
+    // Postcondition: The specified Runnable command is run once. All threads resume execution.
     public synchronized void await() {
         try {
             this.count--;
@@ -31,8 +31,9 @@ public class MyCyclicBarrier {
                 this.wait();
             } else {
                 this.notifyAll();
-                if (this.torun != null)
+                if (this.torun != null) {
                     this.torun.run();
+                }
                 this.count = this.parties;
             }
         } catch (InterruptedException e) {

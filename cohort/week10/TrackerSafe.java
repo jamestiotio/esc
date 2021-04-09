@@ -102,6 +102,7 @@ public class TrackerSafe {
     // Is this an escape?
     // Yes, a reference to the locations object was created and returned.
     // This is because the Map object is a non-primitive data type (hence, pass-by-reference).
+    // It is different from the normal usual pass-by-value behavior done by Java for primitive data types.
     // Hence, the locations object was modifiable.
     // Return a deep copy of the locations object instead.
     public Map<String, MutablePoint> getLocations() {
@@ -114,6 +115,7 @@ public class TrackerSafe {
     // Is this an escape?
     // Yes, since a reference to the loc MutablePoint object was returned.
     // This is because a Class is not a primitive data type (hence, pass-by-reference).
+    // It is different from the normal usual pass-by-value behavior done by Java for primitive data types.
     // Hence, the attributes of the loc object was modifiable.
     // Instead, we return a new instance of MutablePoint and synchronize using ReentrantLock so that
     // the locations map will be visible.

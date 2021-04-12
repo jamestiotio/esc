@@ -12,21 +12,24 @@ public class ThreadPerTaskExecutorWebServer {
     private static final Executor exec = new ThreadPerTaskExecutor();
 
     public static void main(String[] args) throws Exception {
-        ServerSocket socket = new ServerSocket(4321, 100000000);
-
-        while (true) {
-            final Socket connection = socket.accept();
-            Runnable task = new Runnable() {
-                public void run() {
-                    try {
-                        handleRequest(connection);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+        try (ServerSocket socket = new ServerSocket(4321, 100000000)) {
+            while (true) {
+                final Socket connection = socket.accept();
+                Runnable task = new Runnable() {
+                    public void run() {
+                        try {
+                            handleRequest(connection);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
-            };
+                };
 
-            exec.execute(task);
+                exec.execute(task);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("There is an issue with the socket connection.");
         }
     }
 

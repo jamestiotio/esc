@@ -12,9 +12,10 @@ import java.util.concurrent.TimeUnit;
 /**
  * Question for Cohort Exercise 1
  */
-
 public class PerformanceExperiment {
-    private static final int NUM = 3; // TODO: Vary this number.
+    // Amdahl's Law limits the maximum speedup that can be attained/obtained by the fraction of the
+    // program that must be executed serially/sequentially.
+    private static final int NUM = 3; // TODO: Vary this number (N).
     private static final int POOLSIZE = 20;
     private static final CountDownLatch latch = new CountDownLatch(1);
     private static final CyclicBarrier barrier = new CyclicBarrier(NUM + 1);
@@ -27,6 +28,10 @@ public class PerformanceExperiment {
 
         for (int i = 0; i < NUM; i++) {
             final int j = i + 2;
+            // A Runnable is a task (an abstract, discrete unit of work dynamically assigned to a
+            // thread). Ideally, tasks have sensible boundaries and are independent to facilitate
+            // concurrency. Computation decomposition should be balanced to maximize work-overhead
+            // ratio and to maximize upper bound of speedup.
             exec.execute(new Runnable() {
                 public void run() {
                     try {
@@ -52,7 +57,8 @@ public class PerformanceExperiment {
                             if (latch.getCount() > 0) {
                                 latch.countDown();
                                 long endTime = System.currentTimeMillis();
-                                System.out.println("Time spent: " + (endTime - startTime));
+                                System.out.println(
+                                        "Time spent: " + (endTime - startTime) + " milliseconds.");
                             }
                         }
 

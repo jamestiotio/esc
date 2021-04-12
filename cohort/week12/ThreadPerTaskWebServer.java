@@ -5,12 +5,20 @@ import java.math.BigInteger;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+// For production purposes, task-per-thread has some drawbacks. Thread creation and teardown
+// involves the JVM and OS. Active threads consume extra memory to provide their respective stacks.
+// If there are less CPUs than threads, idle threads also consume memory. There is also a stability
+// limit on the number of concurrent threads.
 public class ThreadPerTaskWebServer {
     public static void main(String[] args) throws Exception {
-        ServerSocket socket = new ServerSocket(54321);
-        while (true) {
-            final Socket connection = socket.accept();
-            new WorkerThread(connection).start();
+        try (ServerSocket socket = new ServerSocket(54321)) {
+            while (true) {
+                final Socket connection = socket.accept();
+                new WorkerThread(connection).start();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("There is an issue with the socket connection.");
         }
     }
 }

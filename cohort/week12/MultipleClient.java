@@ -5,7 +5,6 @@ import java.net.*;
 /**
  * Question for Cohort Exercise 2.
  */
-
 public class MultipleClient {
     public static void main(String[] args) throws Exception {
         int numberOfClients = 1000; // vary this number here
@@ -38,9 +37,9 @@ class Client implements Runnable {
         String hostName = "localhost";
         int portNumber = 54321;
 
-        try {
+        // Local firewall or network settings might block this socket connection
+        try (Socket socket = new Socket(hostName, portNumber)) {
             // long startTime = System.currentTimeMillis();
-            Socket socket = new Socket(hostName, portNumber);
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out.println(n.toString());

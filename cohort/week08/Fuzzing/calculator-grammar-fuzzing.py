@@ -3,12 +3,14 @@ import secrets
 # Use a global limit to prevent an infinite loop and expanding forever
 GLOBAL_LIMIT, CURRENT_EXPANSION_LENGTH = 1000, 0
 
+
 def fuzz_expr():
     global GLOBAL_LIMIT, CURRENT_EXPANSION_LENGTH
     if CURRENT_EXPANSION_LENGTH < GLOBAL_LIMIT:
         return secrets.choice(["Expr + Term", "Expr - Term", "Term"])
     else:
         return "Term"
+
 
 def fuzz_term():
     global GLOBAL_LIMIT, CURRENT_EXPANSION_LENGTH
@@ -17,12 +19,14 @@ def fuzz_term():
     else:
         return "Factor"
 
+
 def fuzz_factor():
     global GLOBAL_LIMIT, CURRENT_EXPANSION_LENGTH
     if CURRENT_EXPANSION_LENGTH < GLOBAL_LIMIT:
-        return secrets.choice(["-Integer", "(Expr)", "Integer", "Integer.Integer"])
+        return secrets.choice(["(-Integer)", "(Expr)", "Integer", "Integer.Integer"])
     else:
         return "Integer"
+
 
 def fuzz_integer():
     global GLOBAL_LIMIT, CURRENT_EXPANSION_LENGTH
@@ -31,9 +35,13 @@ def fuzz_integer():
     else:
         return "Digit"
 
+
 def fuzz_digit():
+    # Calculators should be able to handle redundant leading prefix zeros
     return str(secrets.choice([i for i in range(0, 10)]))
 
+
+# Do iteration instead of recursion (attempting to avoid recursion so as to prevent exceeding the maximum recursion depth allowable)
 def fuzzer():
     global GLOBAL_LIMIT, CURRENT_EXPANSION_LENGTH
     S = "Expr"
@@ -48,7 +56,7 @@ def fuzzer():
         while "Factor" in S:
             S = S.replace("Factor", fuzz_factor(), 1)
             CURRENT_EXPANSION_LENGTH += 1
-    
+
     while "Integer" in S:
         S = S.replace("Integer", fuzz_integer(), 1)
         CURRENT_EXPANSION_LENGTH += 1
@@ -57,6 +65,7 @@ def fuzzer():
         S = S.replace("Digit", fuzz_digit(), 1)
 
     return S
+
 
 if __name__ == "__main__":
     print(fuzzer())

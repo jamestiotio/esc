@@ -58,8 +58,8 @@ public class BrokenLinkFinderSmell {
     }
 
     public static void main(String[] args) throws Exception {
-        System.setProperty("webdriver.gecko.driver",
-                "/Users/sudiptac/sudiptac/teaching/SUTD/50.003@2018/Test/geckodriver");
+        // System.setProperty("webdriver.gecko.driver",
+        //         "/Users/sudiptac/sudiptac/teaching/SUTD/50.003@2018/Test/geckodriver");
         WebDriver driver = new FirefoxDriver();
 
         // System.setProperty("webdriver.chrome.driver","/Users/sudiptac/sudiptac/teaching/SUTD/50.003@2018/Test/chromedriver");

@@ -1,7 +1,6 @@
 /**
  * Question for Cohort Exercise 8
  */
-
 public class StripedMap {
     // synchronization policy: buckets[n] guarded by locks[n%N_LOCKS]
     private static final int N_LOCKS = 16;

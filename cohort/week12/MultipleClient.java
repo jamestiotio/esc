@@ -1,6 +1,8 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.math.BigInteger;
-import java.net.*;
+import java.net.Socket;
 
 /**
  * Question for Cohort Exercise 2.
@@ -39,13 +41,14 @@ class Client implements Runnable {
 
         // Local firewall or network settings might block this socket connection
         try (Socket socket = new Socket(hostName, portNumber)) {
-            // long startTime = System.currentTimeMillis();
+            long startTime = System.currentTimeMillis();
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out.println(n.toString());
             out.flush();
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream())); // Waiting for results from server.
+            while (!in.ready());
             in.readLine();
-            // System.out.println("Spent time: " + (System.currentTimeMillis() - startTime));
+            System.out.println("Spent time: " + (System.currentTimeMillis() - startTime));
             out.close();
             in.close();
             socket.close();

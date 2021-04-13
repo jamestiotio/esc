@@ -48,6 +48,7 @@ public class HeaderNameFinder {
                     Thread.sleep(3000);
                     // Assert that title is not empty
                     assertFalse(driver.getTitle().isEmpty());
+                    assertFalse(driver.getTitle() == null);
                     // Click the back button in browser
                     driver.navigate().back();
                     links = driver.findElements(By.tagName("a"));

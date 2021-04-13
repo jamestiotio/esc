@@ -9,10 +9,10 @@ import java.net.Socket;
  */
 public class MultipleClient {
     public static void main(String[] args) throws Exception {
-        int numberOfClients = 1000; // vary this number here
+        int numberOfClients = 5; // vary this number here (5, 10, 100 and 1000)
         long startTime = System.currentTimeMillis();
-        BigInteger n = new BigInteger("4294967297");
-        // BigInteger n = new BigInteger("239839672845043");
+        // BigInteger n = new BigInteger("4294967297");
+        BigInteger n = new BigInteger("239839672845043");
         Thread[] clients = new Thread[numberOfClients];
 
         for (int i = 0; i < numberOfClients; i++) {
@@ -23,7 +23,9 @@ public class MultipleClient {
         for (int i = 0; i < numberOfClients; i++) {
             clients[i].join();
         }
-        System.out.println("Spent time: " + (System.currentTimeMillis() - startTime));
+        long timeSpent = System.currentTimeMillis() - startTime;
+        System.out.println("Total spent time: " + timeSpent); // Total time spent
+        System.out.println("Throughput: " + (numberOfClients / timeSpent)); // Throughput
     }
 }
 
@@ -45,10 +47,10 @@ class Client implements Runnable {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             out.println(n.toString());
             out.flush();
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream())); // Waiting for results from server.
-            while (!in.ready());
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            while (!in.ready()); // Waiting for results from server.
             in.readLine();
-            System.out.println("Spent time: " + (System.currentTimeMillis() - startTime));
+            System.out.println("Spent time: " + (System.currentTimeMillis() - startTime)); // Latency
             out.close();
             in.close();
             socket.close();

@@ -6,7 +6,7 @@ public class SequentialExecutorWebServer {
     private static final Executor exec = new WithinThreadExecutor();
 
     public static void main(String[] args) throws Exception {
-        ServerSocket socket = new ServerSocket(4321, 1000);
+        ServerSocket socket = new ServerSocket(54321, 1000);
 
         while (true) {
             final Socket connection = socket.accept();

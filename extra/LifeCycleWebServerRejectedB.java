@@ -13,7 +13,7 @@ public class LifeCycleWebServerRejectedB {
     private static final ExecutorService exec = new ScheduledThreadPoolExecutor(5);
 
     public static void main(String[] args) throws Exception {
-        ServerSocket socket = new ServerSocket(43210);
+        ServerSocket socket = new ServerSocket(4321);
 
         while (!exec.isShutdown()) {
             try {

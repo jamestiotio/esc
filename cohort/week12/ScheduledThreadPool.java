@@ -22,10 +22,10 @@ public class ScheduledThreadPool {
 
         TimeUnit.SECONDS.sleep(30);
 
-        exec.shutdown();
+        exec.shutdown(); // Same as shutdownNow() if tasks ignore interruption
     }
 
     protected static void handleRequest(int count) {
-        System.out.println("Task " + count + " is executing");
+        System.out.println("Task " + count + " is executing...");
     }
 }

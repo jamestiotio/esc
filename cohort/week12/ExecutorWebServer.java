@@ -4,12 +4,28 @@ import java.net.*;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+// Avoid submitting asymmetrically long-running tasks so as to not impair the responsiveness of the
+// Executor-managed service. Reusing threads also create channels for communication between tasks
+// (might have visibility issues).
 public class ExecutorWebServer {
-    private static final int NTHREADS = 100;
+    // Heuristic empirical optimization
+    // Optimal pool size, M = N * U * (1 + W/C)
+    // N: Number of CPUs
+    // U: Target CPU utilization
+    // W/C: Ratio of wait time to compute time
+    // Otherwise, for compute-intensive tasks: N+1 threads for a N-processor system.
+    // And for tasks with I/O or other blocking operations, need a larger pool.
+    // Solving this issue without manual tuning and hardcoding is much more complicated since it
+    // requires mathematical optimization depending on various configurations (academic research
+    // problem).
+    // private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
+    private static final int NTHREADS = 3; // For our case, 3 seems to be the optimal pool size.
+    // Other possible Executor types include: newCachedThreadPool, newSingleThreadExecutor and
+    // newScheduledThreadPool.
     private static final Executor exec = Executors.newFixedThreadPool(NTHREADS);
 
     public static void main(String[] args) throws Exception {
-        ServerSocket socket = new ServerSocket(4321, 1000);
+        ServerSocket socket = new ServerSocket(54321, 1000);
 
         while (true) {
             final Socket connection = socket.accept();
@@ -24,6 +40,7 @@ public class ExecutorWebServer {
                 }
             };
 
+            // Deadlock and liveness hazard might happen if tasks are heterogeneous or dependent.
             exec.execute(task);
         }
     }

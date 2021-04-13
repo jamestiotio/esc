@@ -25,13 +25,18 @@ public class QuickSortParameterizedTest {
                         661, 932},
                         new int[] {932, -865, 289, -309, 111, -842, -863, 661, 13, -314, 297, 274,
                                 -721, -453, 513}},
-                {null, null}, {null, new int[] {}}});
+                {null, null}, {null, new int[] {}}, {new int[0], null}, {new int[0], new int[0]},
+                {new int[] {}, new int[] {}}, {new int[] {Integer.MIN_VALUE, Integer.MAX_VALUE},
+                        new int[] {Integer.MAX_VALUE, Integer.MIN_VALUE}}});
     }
 
     @Test
     public void quickSortTest() {
         QuickSort quickSort = new QuickSort();
         quickSort.sort(inputArr);
-        assertArrayEquals(outputArr, quickSort.getArray());
+        if (inputArr == null || inputArr.length == 0)
+            assert (quickSort.getArray() == null);
+        else
+            assertArrayEquals(outputArr, quickSort.getArray());
     }
 }

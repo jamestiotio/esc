@@ -3,23 +3,34 @@ import java.security.SecureRandom;
 
 public class quiz3 {
     static int n = 1000;
-    static int sum = 0;
+    static int sum = 0; // The "volatile" keyword is not needed here
     static int[] inputs = new int[n];
     final static int k = 16; // Number of threads
     static double mean, median;
     static int[] sortedInputs;
 
+    private final static Object lock = new Object(); // Lock for synchronization
+
     // Slightly modified implementation from original question (only add non-negative integers)
     public static void populateInput() {
         for (int i = 0; i < n; i++) {
+            // inputs[i] = new Random().nextInt(); // Original question's implementation
             inputs[i] = new SecureRandom().nextInt(n);
         }
     }
 
-    // This is only for single-threaded summation
+    // This is only for single-threaded summation (from original question)
     public static void computeSum() {
         for (int i = 0; i < n; i++) {
             sum += inputs[i];
+        }
+    }
+
+    public static void computeSum(int start, int end) {
+        for (int i = start; i < end; i++) {
+            synchronized (lock) { // Lock here, not outside (to prevent issues)
+                sum += inputs[i];
+            }
         }
     }
 
@@ -31,6 +42,35 @@ public class quiz3 {
     public static void main(String[] args) {
         populateInput();
         // computeSum();
+
+        Thread[] threads = new Thread[k];
+
+        // This model solutions implementation is less general since it assumes that k is a perfect
+        // divider of n. If not, we'll have to include a function to sanitise this and trim the
+        // number of threads.
+        for (int i = 0; i < k; i++) {
+            int index = i;
+            threads[i] = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    // Split the array equally to allow the individual threads to process (note that
+                    // this does not prevent out-of-range errors and an additional check is needed).
+                    // computeSum(index * n / k, (index + 1) * n / k);
+                }
+            });
+        }
+        for (Thread thread : threads) {
+            thread.start();
+        }
+
+        // Wait for completion
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                System.out.println("Main thread interrupted.");
+            }
+        }
 
         // Execute multi-threaded summation
         final Summer[] partialSums = new Summer[k];
@@ -114,6 +154,8 @@ class Summer implements Runnable {
     }
 
     private void computeSum() {
+        // This implementation does not need to check for out-of-range errors. Nor does it require k
+        // to be a perfect exact divisor of n with zero remainder.
         for (int i = this.start; i < this.inputs.length; i += this.step) {
             this.result += this.inputs[i];
         }
@@ -218,8 +260,7 @@ class BottomUpMergeSort implements Runnable {
                 a++;
                 j++;
             }
-        }
-        else if (b <= to) {
+        } else if (b <= to) {
             // Copy any remaining entries of the second half
             while (b <= to) {
                 x[j] = result[b];

@@ -3,7 +3,6 @@ import java.util.concurrent.CountDownLatch;
 /**
  * Question of Cohort Exercise 2
  */
-
 public class CountDownLatchExerciseQns {
     public static void main(String args[]) throws InterruptedException {
         final int limit = 7;
@@ -155,7 +154,7 @@ class Searcher extends Thread {
 
             // Do be aware that getCount() is volatile but not synchronized (this is put here to
             // prevent more Fs than what is necessary to be discovered/found)
-            else if (this.latch.getCount() == 0) {
+            else if (this.latch.getCount() == 0 || this.finish.getCount() == 0) {
                 this.interrupt();
             }
 

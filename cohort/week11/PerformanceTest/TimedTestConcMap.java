@@ -46,6 +46,7 @@ public class TimedTestConcMap extends AddRemoveTest {
         }
     }
 
+    // ConcurrentHashMap is slower in general.
     public static void main(String[] args) throws Exception {
         int tpt = 10000; // trials per thread
         System.out.println("Starting performance test for ConcurrentHashMap...");

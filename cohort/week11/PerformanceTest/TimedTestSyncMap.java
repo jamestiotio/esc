@@ -47,6 +47,7 @@ public class TimedTestSyncMap extends AddRemoveTest {
         }
     }
 
+    // Collections.synchronizedMap is faster in general.
     public static void main(String[] args) throws Exception {
         int tpt = 10000; // trials per thread
         System.out.println("Starting performance test for Collections.synchronizedMap...");

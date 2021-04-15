@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 public class ThreadPerTaskExecutorWebServer {
     private static final int NTHREADS = 100;
     private static final Executor exec = new ThreadPerTaskExecutor();
-    // private static final Executor exec = Executors.newFixedThreadPool(100);
+    // private static final Executor exec = Executors.newFixedThreadPool(NTHREADS);
 
     public static void main(String[] args) throws Exception {
         try (ServerSocket socket = new ServerSocket(54321, 100000000)) {

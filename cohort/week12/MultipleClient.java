@@ -9,7 +9,7 @@ import java.net.Socket;
  */
 public class MultipleClient {
     public static void main(String[] args) throws Exception {
-        int numberOfClients = 5; // vary this number here (5, 10, 100 and 1000)
+        int numberOfClients = 5; // Vary this number here (5, 10, 100 and 1000)
         long startTime = System.currentTimeMillis();
         // BigInteger n = new BigInteger("4294967297");
         BigInteger n = new BigInteger("239839672845043");
@@ -24,8 +24,9 @@ public class MultipleClient {
             clients[i].join();
         }
         long timeSpent = System.currentTimeMillis() - startTime;
-        System.out.println("Total spent time: " + timeSpent); // Total time spent
-        System.out.println("Throughput: " + (numberOfClients / timeSpent)); // Throughput
+        double throughput = (double) numberOfClients / (double) timeSpent;
+        System.out.println("Total spent time: " + timeSpent + " ms"); // Total time spent
+        System.out.println("Throughput: " + throughput); // Throughput
     }
 }
 
@@ -48,9 +49,13 @@ class Client implements Runnable {
             out.println(n.toString());
             out.flush();
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            while (!in.ready()); // Waiting for results from server.
+            // Waiting for results from server, which might fix the connection issue for later Java
+            // versions like Java 15. However, this busy-waiting will spend a lot of CPU resources.
+            // For larger numberOfClients, it might even cause connection issues to reappear. You
+            // have been warned! Run without this on Java 11 for a more comfortable experience.
+            // while (!in.ready());
             in.readLine();
-            System.out.println("Spent time: " + (System.currentTimeMillis() - startTime)); // Latency
+            System.out.println("Spent time: " + (System.currentTimeMillis() - startTime) + " ms"); // Latency
             out.close();
             in.close();
             socket.close();

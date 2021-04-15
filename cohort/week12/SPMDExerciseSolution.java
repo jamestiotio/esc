@@ -7,11 +7,12 @@ import java.util.concurrent.Future;
  * Solution for Cohort Exercise 5
  */
 public class SPMDExerciseSolution {
+    static double pi = 0;
+    static final Object lock = new Object();
+
     public static void main(String[] args) throws Exception {
         int NTHREADS = 5;
         ExecutorService exec = Executors.newFixedThreadPool(NTHREADS - 1);
-        double pi = 0;
-        // final Object lock = new Object();
 
         final double stepSize = 1.0 / NTHREADS;
         for (int i = 0; i < NTHREADS; i++) {
@@ -35,10 +36,10 @@ public class SPMDExerciseSolution {
                 }
             });
 
-            pi += result.get();
+            SPMDExerciseSolution.pi += result.get();
         }
 
-        System.out.println(pi);
+        System.out.println(SPMDExerciseSolution.pi);
         exec.shutdown();
     }
 

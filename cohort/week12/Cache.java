@@ -6,6 +6,11 @@ import java.util.Map;
 public class Cache {
     private final Map<Integer, List<Integer>> results = new HashMap<Integer, List<Integer>>();
 
+    public static void main(String[] args) {
+        // Thread[] woker = new Thread[];
+    }
+
+    // Synchronized keyword here leads to poor concurrency (is the cache useful here?)
     public synchronized List<Integer> service(int input) {
         List<Integer> factors = results.get(input);
 

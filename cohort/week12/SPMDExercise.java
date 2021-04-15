@@ -24,7 +24,7 @@ public class SPMDExercise {
         return 4.0 / (1 + x * x);
     }
 
-    // the following does numerical integration using Trapezoidal rule.
+    // The following does numerical integration using Trapezoidal rule.
     public static double integrate(double a, double b) {
         int N = 10000; // preciseness parameter
         double h = (b - a) / (N - 1); // step size

@@ -76,7 +76,11 @@ class Buffer {
         objects = new Object[SIZE];
     }
 
+    // A synchronized keyword on the method also works (but it's always good to try reduce the
+    // scope/size of the critical section and doing lock splitting/stripping)
     public void addItem(Object object) {
+        // Prevent multiple threads to concurrently invoke this method and avoids busy-waiting for
+        // other threads
         synchronized (this) {
             if (count < SIZE) {
                 objects[count] = object;
@@ -92,7 +96,11 @@ class Buffer {
         }
     }
 
+    // A synchronized keyword on the method also works (but it's always good to try reduce the
+    // scope/size of the critical section and doing lock splitting/stripping)
     public Object removeItem() {
+        // Prevent multiple threads to concurrently invoke this method and avoids busy-waiting for
+        // other threads
         synchronized (this) {
             if (count > 0) {
                 count--;

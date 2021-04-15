@@ -11,11 +11,24 @@ public class SPMDExerciseSolution {
         int NTHREADS = 5;
         ExecutorService exec = Executors.newFixedThreadPool(NTHREADS - 1);
         double pi = 0;
+        // final Object lock = new Object();
 
         final double stepSize = 1.0 / NTHREADS;
         for (int i = 0; i < NTHREADS; i++) {
             final double a = i * stepSize;
             final double b = (i + 1) * stepSize;
+
+            /*
+            exec.execute(new Runnable() {
+                @Override
+                public void run() {
+                    synchronized (lock) {
+                        SPMDExerciseSolution.pi += integrate(a, b);
+                    }
+                }
+            });
+            */
+
             Future<Double> result = exec.submit(new Callable<Double>() {
                 public Double call() throws Exception {
                     return integrate(a, b);

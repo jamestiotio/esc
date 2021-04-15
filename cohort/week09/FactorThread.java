@@ -4,7 +4,9 @@ public class FactorThread {
     // Define desired thread count/number of threads (time complexity: O(n/k), where k is the number
     // of threads)
     public static final int NUMBER_OF_THREADS = 16;
-    // There is no need to declare these as variables of type AtomicBoolean
+    // There is no need to declare these as variables of type AtomicBoolean (no need to add
+    // unnecessary locks so as to not degrade performance, i.e., we live with a benign race
+    // condition)
     public static volatile boolean found = false;
     public static volatile boolean stop = false;
 

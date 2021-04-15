@@ -5,7 +5,8 @@ import java.util.concurrent.locks.ReentrantLock;
 // Please do take note that generally, it is not recommended to rely on method parameters for
 // synchronization (such as by locking about/on them and using them as locks). A possibly better
 // idea would be to lock on either this object or some form of a global lock (such as a
-// ReentrantLock).
+// ReentrantLock). Also, if the list is big/huge, it is not ideal in terms of performance. An
+// Iterator might be more useful (and reduce the lock granularity).
 public class FirstExampleFixed {
     // private static ReentrantLock lock = new ReentrantLock();
 

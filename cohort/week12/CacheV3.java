@@ -8,13 +8,13 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 
+// Use the lazy evaluation method.
 public class CacheV3 {
     private final ConcurrentHashMap<Integer, Future<List<Integer>>> results =
             new ConcurrentHashMap<Integer, Future<List<Integer>>>(); // the last factors must be the
                                                                      // factors of the last number
 
     public List<Integer> service(final int input) throws Exception {
-
         // the future result of factorization
         Future<List<Integer>> f;
         // set up the futuretask

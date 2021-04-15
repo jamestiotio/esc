@@ -7,12 +7,12 @@ import java.util.Queue;
 /**
  * Question for Cohort Exercise 6
  */
-
 public class GDesktopProb {
     private final static int N_CONSUMERS = 4;
 
     // it starts here
     public static void startIndexing(File[] roots) {
+        // Blocking queue
         Queue<File> queue = new LinkedList<File>();
         FileFilter filter = new FileFilter() {
             public boolean accept(File file) {

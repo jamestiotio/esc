@@ -106,7 +106,7 @@ public class quiz3 {
         // Iteratively merge sort the input array in a multi-threaded fashion
         // Do not cheat by using Arrays.sort() instead! (Defeats the point of the question)
 
-        // Execute multi-threaded sorting
+        // Execute multi-threaded parallel sorting
         BottomUpMergeSort sorter = new BottomUpMergeSort(inputs, k);
         Thread mainSorterThread = new Thread(sorter);
         mainSorterThread.start();
@@ -117,9 +117,10 @@ public class quiz3 {
             e.printStackTrace();
         }
 
+        // Get the globally-sorted input array
         sortedInputs = sorter.getResult();
 
-        // Get the median and assign it to a variable
+        // Grab the median and assign it to a variable
         if (n % 2 == 0) {
             median = ((double) sortedInputs[n / 2] + (double) sortedInputs[n / 2 - 1]) / 2;
         } else {

@@ -49,10 +49,12 @@ class Client implements Runnable {
             out.println(n.toString());
             out.flush();
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            // Waiting for results from server, which might fix the connection issue for later Java
-            // versions like Java 15. However, this busy-waiting will spend a lot of CPU resources.
-            // For larger numberOfClients, it might even cause connection issues to reappear. You
-            // have been warned! Run without this on Java 11 for a more comfortable experience.
+            // Waiting for results from server, which might temporarily fix the connection issue.
+            // However, this busy-waiting will spend and consume a lot of CPU resources. For larger
+            // numberOfClients, it might even cause connection issues to reappear. You have been
+            // warned! Run without this line with only one ServerSocket for a more comfortable
+            // experience. Please do not use this as this fix is unsustainable and not fit for
+            // scalability purposes.
             // while (!in.ready());
             in.readLine();
             System.out.println("Spent time: " + (System.currentTimeMillis() - startTime) + " ms"); // Latency

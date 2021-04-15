@@ -6,17 +6,20 @@ public class SequentialExecutorWebServer {
     private static final Executor exec = new WithinThreadExecutor();
 
     public static void main(String[] args) throws Exception {
-        ServerSocket socket = new ServerSocket(54321, 1000);
+        try (ServerSocket socket = new ServerSocket(54321, 1000)) {
+            while (true) {
+                final Socket connection = socket.accept();
+                Runnable task = new Runnable() {
+                    public void run() {
+                        handleRequest(connection);
+                    }
+                };
 
-        while (true) {
-            final Socket connection = socket.accept();
-            Runnable task = new Runnable() {
-                public void run() {
-                    handleRequest(connection);
-                }
-            };
-
-            exec.execute(task);
+                exec.execute(task);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("There is an issue with the socket connection.");
         }
     }
 

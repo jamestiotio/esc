@@ -25,23 +25,26 @@ public class ExecutorWebServer {
     private static final Executor exec = Executors.newFixedThreadPool(NTHREADS);
 
     public static void main(String[] args) throws Exception {
-        ServerSocket socket = new ServerSocket(54321, 1000);
-
-        while (true) {
-            final Socket connection = socket.accept();
-            Runnable task = new Runnable() {
-                public void run() {
-                    try {
-                        handleRequest(connection);
-                    } catch (Exception e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
+        try (ServerSocket socket = new ServerSocket(54321, 1000)) {
+            while (true) {
+                final Socket connection = socket.accept();
+                Runnable task = new Runnable() {
+                    public void run() {
+                        try {
+                            handleRequest(connection);
+                        } catch (Exception e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
                     }
-                }
-            };
+                };
 
-            // Deadlock and liveness hazard might happen if tasks are heterogeneous or dependent.
-            exec.execute(task);
+                // Deadlock and liveness hazard might happen if tasks are heterogeneous or dependent.
+                exec.execute(task);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("There is an issue with the socket connection.");
         }
     }
 

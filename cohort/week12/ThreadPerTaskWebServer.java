@@ -13,7 +13,8 @@ public class ThreadPerTaskWebServer {
     public static void main(String[] args) throws Exception {
         // If the client process is interrupted abruptly and the socket is not closed properly, this
         // will require a restart of the server to properly re-establish an open socket again
-        // available for connections.
+        // available for connections (a SocketException due to connection reset error will be
+        // raised).
         try (ServerSocket socket = new ServerSocket(54321)) {
             while (true) {
                 final Socket connection = socket.accept();

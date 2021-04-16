@@ -1,0 +1,11 @@
+examiner waiting for students to get ready;
+student 24 ready;
+student 23 ready;
+student 23 taking exam;
+examiner waiting for students to hand in;
+student 24 taking exam;
+student 23 handing in exam;
+student 23 leaves
+student 24 handing in exam;
+student 24 leaves
+all students have handed in, exam has ended

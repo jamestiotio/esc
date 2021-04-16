@@ -17,9 +17,9 @@ public class TimedTestConcMap extends AddRemoveTest {
      * @param nPairThreads
      * @param trials
      */
-    public TimedTestConcMap(int nPairThreads, int trials) {
+    public TimedTestConcMap(int nPairThreads, int trials, int capacity) {
         super(nPairThreads, trials);
-        this.map = new ConcurrentHashMap<>();
+        this.map = new ConcurrentHashMap<>(capacity);
         this.barrier = new CyclicBarrier(nPairThreads * 2 + 1, this.timer);
     }
 
@@ -51,9 +51,9 @@ public class TimedTestConcMap extends AddRemoveTest {
         int tpt = 10000; // trials per thread
         System.out.println("Starting performance test for ConcurrentHashMap...");
         for (int cap = 1; cap <= 1000; cap *= 10) {
-            System.out.println("Capacity: " + cap);
+            System.out.println("Initial capacity: " + cap);
             for (int pairs = 1; pairs <= 128; pairs *= 2) {
-                TimedTestConcMap t = new TimedTestConcMap(pairs, tpt);
+                TimedTestConcMap t = new TimedTestConcMap(pairs, tpt, cap);
                 System.out.print("Pairs: " + pairs + "\t");
                 t.test();
                 System.out.print("\t");

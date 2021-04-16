@@ -18,9 +18,9 @@ public class TimedTestSyncMap extends AddRemoveTest {
      * @param nPairThreads
      * @param trials
      */
-    public TimedTestSyncMap(int nPairThreads, int trials) {
+    public TimedTestSyncMap(int nPairThreads, int trials, int capacity) {
         super(nPairThreads, trials);
-        this.map = Collections.synchronizedMap(new HashMap<Integer, Integer>());
+        this.map = Collections.synchronizedMap(new HashMap<Integer, Integer>(capacity));
         this.barrier = new CyclicBarrier(nPairThreads * 2 + 1, this.timer);
     }
 
@@ -52,9 +52,9 @@ public class TimedTestSyncMap extends AddRemoveTest {
         int tpt = 10000; // trials per thread
         System.out.println("Starting performance test for Collections.synchronizedMap...");
         for (int cap = 1; cap <= 1000; cap *= 10) {
-            System.out.println("Capacity: " + cap);
+            System.out.println("Initial capacity: " + cap);
             for (int pairs = 1; pairs <= 128; pairs *= 2) {
-                TimedTestSyncMap t = new TimedTestSyncMap(pairs, tpt);
+                TimedTestSyncMap t = new TimedTestSyncMap(pairs, tpt, cap);
                 System.out.print("Pairs: " + pairs + "\t");
                 t.test();
                 System.out.print("\t");

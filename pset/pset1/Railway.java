@@ -17,6 +17,7 @@ class GlobalNetworkManager {
     }
 }
 
+
 class Train {
     int trainID;
     int trainType; // 0 - narrow, 1 - meter, 2 - broad
@@ -31,13 +32,15 @@ class Train {
     }
 }
 
+
 class Engine {
     int engineID;
 }
 
+
 class Route {
     List<Junction> waypoints;
-    
+
     void push() {
         // Add implementation here
     }
@@ -46,6 +49,7 @@ class Route {
         // Add implementation here
     }
 }
+
 
 class RailwayNetwork {
     List<Track> tracks;
@@ -68,10 +72,12 @@ class RailwayNetwork {
     }
 }
 
+
 abstract class RailwayObject {
     int id;
     boolean isOccupied;
 }
+
 
 class Track extends RailwayObject {
     int trackType; // 0 - narrow, 1 - meter, 2 - broad
@@ -79,6 +85,7 @@ class Track extends RailwayObject {
     Junction startJunction;
     Junction endJunction;
 }
+
 
 class Junction extends RailwayObject {
     List<Track> incidentTracks;

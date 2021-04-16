@@ -4,6 +4,7 @@ class Miles {
     }
 }
 
+
 class Plane {
     public String getType() {
         // Add implementation here
@@ -14,21 +15,22 @@ class Plane {
     }
 }
 
+
 class Flight {
-      Plane assignedPlane;
-      boolean isAssignedToPlane = false;
-      Miles flightDuration;
+    Plane assignedPlane;
+    boolean isAssignedToPlane = false;
+    Miles flightDuration;
 
-      public String getAssignedPlaneType() {
-          if (isAssignedToPlane) {
-              return assignedPlane.getType();
-          }
-      }
+    public String getAssignedPlaneType() {
+        if (isAssignedToPlane) {
+            return assignedPlane.getType();
+        }
+    }
 
-      public boolean checkDistance() {
-          if (isAssignedToPlane) {
-              return assignedPlane.maximumDistance() > flightDuration;
-          }
-      }
+    public boolean checkDistance() {
+        if (isAssignedToPlane) {
+            return assignedPlane.maximumDistance() > flightDuration;
+        }
+    }
 
 }

@@ -46,14 +46,15 @@ public class BoundedBufferTest {
             threads[i].join();
         }
 
+        // Postcondition: The BoundedBuffer is full.
         assertTrue(bb.isFull());
         assertFalse(bb.isEmpty());
     }
 
     /**
-     * TODO: implement this test. Initialize a buffer with #items inside. Initialize multiple threads
-     * that concurrently remove items from the buffer. Make sure the total remove() = #items in
-     * buffer. What should be the postcondition?
+     * TODO: implement this test. Initialize a buffer with #items inside. Initialize multiple
+     * threads that concurrently remove items from the buffer. Make sure the total remove() = #items
+     * in buffer. What should be the postcondition?
      */
     @Test
     public void testIsEmptyAfterTakesAll() throws InterruptedException {
@@ -85,13 +86,15 @@ public class BoundedBufferTest {
             threads[i].join();
         }
 
+        // Postcondition: The BoundedBuffer is empty.
         assertTrue(bb.isEmpty());
         assertFalse(bb.isFull());
     }
 
     /**
-     * TODO: implement this test. Initialize a buffer with 0 item inside. Initialize multiple threads
-     * that concurrently attempt to remove items from the buffer. What should be the postcondition?
+     * TODO: implement this test. Initialize a buffer with 0 item inside. Initialize multiple
+     * threads that concurrently attempt to remove items from the buffer. What should be the
+     * postcondition?
      */
     @Test
     public void testTakeBlocksWhenEmpty() {
@@ -118,6 +121,8 @@ public class BoundedBufferTest {
 
         for (int i = 0; i < numOfThreads; i++) {
             try {
+                // Postcondition: Since the BoundedBuffer is already empty, each thread will
+                // continue to run until timeout.
                 threads[i].join(LOCKUP_DETECT_TIMEOUT);
             } catch (InterruptedException e) {
                 fail();

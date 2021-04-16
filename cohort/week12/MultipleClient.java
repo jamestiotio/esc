@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.math.BigInteger;
@@ -39,11 +40,39 @@ class Client implements Runnable {
     }
 
     public void run() {
+        // Local firewall or OS network settings might sometimes block this socket connection
         String hostName = "localhost";
         int portNumber = 54321;
 
-        // Local firewall or network settings might block this socket connection
+        // Uncomment this section if you are attempting to use Windows or Mac and experience
+        // "ConnectException: Connection refused" errors for larger numberOfClients. Wireshark
+        // analysis indicates that the TCP RST flags were being set as 1 instead of 0 for some
+        // reason. Performance-wise, it should be comparable to the Ubuntu/Linux implementation
+        // version.
+        /*
+        Socket socket = null;
+        while (true) {
+            try {
+                socket = new Socket(hostName, portNumber);
+                if (socket != null) {
+                    break;
+                }
+            } catch (IOException e) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
+        }
+        */
+
+        // Use the first try statement if you are attempting to use Ubuntu with less strict network
+        // security policies. Use the second try statement and comment the first one if you are
+        // uncommenting and using the block above.
         try (Socket socket = new Socket(hostName, portNumber)) {
+        // try {
             long startTime = System.currentTimeMillis();
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             out.println(n.toString());

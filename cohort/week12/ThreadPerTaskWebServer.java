@@ -12,10 +12,10 @@ import java.net.Socket;
 public class ThreadPerTaskWebServer {
     public static void main(String[] args) throws Exception {
         // If the client process is interrupted abruptly and the socket is not closed properly, this
-        // will require a restart of the server to properly re-establish an open socket again
-        // available for connections (a SocketException due to connection reset error will be
-        // raised).
-        try (ServerSocket socket = new ServerSocket(54321)) {
+        // will require a restart of the server to properly re-establish an open server socket again
+        // available for connections (a "SocketException: Connection reset" error might be raised on
+        // Windows and Mac).
+        try (ServerSocket socket = new ServerSocket(54321, 100000000)) {
             while (true) {
                 final Socket connection = socket.accept();
                 new WorkerThread(connection).start();
@@ -49,6 +49,7 @@ class WorkerThread extends Thread {
             out.close();
             connection.close();
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("error");
         }
     }

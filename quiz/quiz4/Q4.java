@@ -17,8 +17,16 @@ public class Q4 {
         }
         examiner.start();
         Thread.sleep(1000); // Force the examiner to start first
-        for (int i = 0; i < numberofstudents; i++) {
-            students[i].start();
+        for (Student student : students) {
+            student.start();
+        }
+
+        try {
+            examiner.join();
+            for (Student student : students)
+                student.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
@@ -29,14 +37,14 @@ class Examiner extends Thread {
 
     public Examiner(final Phaser phaser) {
         this.phaser = phaser;
-        phaser.register();
+        this.phaser.register();
     }
 
     public void run() {
         System.out.println("examiner waiting for students to get ready;");
-        phaser.arriveAndAwaitAdvance(); // Waiting until all students are ready
+        this.phaser.arriveAndAwaitAdvance(); // Waiting until all students are ready
         System.out.println("examiner waiting for students to hand in;");
-        phaser.arriveAndAwaitAdvance(); // Waiting until everyone has submitted their scripts
+        this.phaser.arriveAndAwaitAdvance(); // Waiting until everyone has submitted their scripts
         System.out.println("all students have handed in, exam has ended");
     }
 }
@@ -47,13 +55,13 @@ class Student extends Thread {
 
     public Student(final Phaser phaser) {
         this.phaser = phaser;
-        phaser.register();
+        this.phaser.register();
     }
 
     public void run() {
         Random r = new Random();
         System.out.println("student " + Thread.currentThread().getId() + " ready;");
-        phaser.arriveAndAwaitAdvance(); // Waiting for exam to start.
+        this.phaser.arriveAndAwaitAdvance(); // Waiting for exam to start.
         System.out.println("student " + Thread.currentThread().getId() + " taking exam;");
         try {
             Thread.sleep((long) ((r.nextDouble() + 1) * 1000));// Taking the exam.
@@ -61,7 +69,7 @@ class Student extends Thread {
             e.printStackTrace();
         }
         System.out.println("student " + Thread.currentThread().getId() + " handing in exam;");
+        this.phaser.arriveAndDeregister(); // Ended the exam.
         System.out.println("student " + Thread.currentThread().getId() + " leaves");
-        phaser.arrive(); // Ended the exam.
     }
 }

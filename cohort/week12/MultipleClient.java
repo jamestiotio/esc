@@ -27,7 +27,7 @@ public class MultipleClient {
         long timeSpent = System.currentTimeMillis() - startTime;
         double throughput = (double) timeSpent / (double) numberOfClients;
         System.out.println("Total spent time: " + timeSpent + " ms"); // Total time spent
-        System.out.println("Throughput: " + throughput + " ms/client"); // Throughput
+        System.out.println("Average throughput: " + throughput + " ms/client"); // Throughput
     }
 }
 

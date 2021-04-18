@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
  * Question for Cohort Exercise 2.
  */
 public class ThreadPerTaskExecutorWebServer {
-    private static final int NTHREADS = 100;
+    // private static final int NTHREADS = 100;
     private static final Executor exec = new ThreadPerTaskExecutor();
     // private static final Executor exec = Executors.newFixedThreadPool(NTHREADS);
 

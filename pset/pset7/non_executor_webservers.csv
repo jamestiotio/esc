@@ -1,0 +1,7 @@
+webserver_type,number_of_clients,total_time_taken,average_throughput
+single_thread,10,7475,747.5
+single_thread,100,78767,787.67
+single_thread,1000,803313,803.313
+thread_per_task,10,2885,288.5
+thread_per_task,100,37788,377.88
+thread_per_task,1000,376583,376.583

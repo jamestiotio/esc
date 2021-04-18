@@ -40,7 +40,8 @@ class Client implements Runnable {
     }
 
     public void run() {
-        // Local firewall or OS network settings might sometimes block this socket connection
+        // Local firewall or OS-specific network settings might sometimes block this socket
+        // connection
         String hostName = "localhost";
         int portNumber = 54321;
 
@@ -52,7 +53,7 @@ class Client implements Runnable {
         // but it feels hacky and there are so many other OS-es out there (Windows and Mac might
         // not be the only problematic ones that require some troubleshooting). Otherwise, using
         // dual-boot options are also feasible/possible. I am hesitant on running this on a VM
-        // since we would need to also ensure that the VM networking is working properly.
+        // since we would need to also ensure that the VM networking policies are working properly.
         /*
         Socket socket = null;
         while (true) {

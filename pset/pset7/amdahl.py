@@ -20,7 +20,7 @@ def calculate_maximum_speedup(n: int, f: float) -> float:
     if n <= 0:
         raise ValueError("n must be positive!")
     elif (f < 0) or (f > 1):
-        raise ValueError("f must be between within the closed unit interval!")
+        raise ValueError("f must be within the closed unit interval!")
 
     max_speedup = 1 / (f + ((1 - f) / n))
     return max_speedup

@@ -48,7 +48,11 @@ class Client implements Runnable {
         // "ConnectException: Connection refused" errors for larger numberOfClients. Wireshark
         // analysis indicates that the TCP RST flags were being set as 1 instead of 0 for some
         // reason. Performance-wise, it should be comparable to the Ubuntu/Linux implementation
-        // version.
+        // version. A programmatic check for the current OS where the JVM runs on could be done,
+        // but it feels hacky and there are so many other OS-es out there (Windows and Mac might
+        // not be the only problematic ones that require some troubleshooting). Otherwise, using
+        // dual-boot options are also feasible/possible. I am hesitant on running this on a VM
+        // since we would need to also ensure that the VM networking is working properly.
         /*
         Socket socket = null;
         while (true) {

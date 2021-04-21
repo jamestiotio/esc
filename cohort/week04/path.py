@@ -30,9 +30,16 @@ def second_main():
         i += 1
 
 
-# This function has infinite paths
+# This function has countably infinite paths
 def third_main():
     x = int(input())
 
     while x > 0:
         x -= 1
+
+# This function has uncountably infinite paths
+def fourth_main():
+    x = float(input())
+
+    while x <= 0:
+        x += 1

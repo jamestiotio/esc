@@ -34,7 +34,8 @@ public class Algorithm {
             newPopulation.saveIndividual(i, newIndiv);
         }
 
-        // Mutate population
+        // Mutate population (as number of mutations increases beyond crossover occurrences, it
+        // tends towards random-based testing)
         for (int i = elitismOffset; i < newPopulation.size(); i++) {
             mutate(newPopulation.getIndividual(i));
         }

@@ -1,5 +1,7 @@
 import java.util.Random;
 import java.util.concurrent.Phaser;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 
 /**
  * Quiz 4.
@@ -28,6 +30,15 @@ public class Q4 {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        /*
+        CyclicBarrier barrier = new CyclicBarrier(numberofstudents + 1);
+        Quiz4Examiner quiz4examiner = new Quiz4Examiner(barrier);
+        for (int i = 0; i < numberofstudents; i++) {
+            new Quiz4Student(barrier).start();
+        }
+        quiz4examiner.start();
+        */
     }
 }
 
@@ -70,6 +81,61 @@ class Student extends Thread {
         }
         System.out.println("student " + Thread.currentThread().getId() + " handing in exam;");
         this.phaser.arriveAndDeregister(); // Ended the exam.
+        System.out.println("student " + Thread.currentThread().getId() + " leaves");
+    }
+}
+
+class Quiz4Examiner extends Thread {
+    private CyclicBarrier barrier;
+    public Quiz4Examiner(final CyclicBarrier barrier) {
+        this.barrier = barrier;
+
+    }
+
+    public void run() {
+        System.out.println("examiner waiting for students to get ready;");
+        try {
+            barrier.await();
+        } catch (InterruptedException | BrokenBarrierException e) {
+            e.printStackTrace();
+        }
+        System.out.println("examiner waiting for students to hand in;");
+        try {
+            barrier.await();
+        } catch (InterruptedException | BrokenBarrierException e) {
+            e.printStackTrace();
+        }
+        System.out.println("all students have handed in, exam has ended");
+    }
+}
+
+class Quiz4Student extends Thread {
+    private CyclicBarrier barrier;
+    public Quiz4Student(final CyclicBarrier barrier) {
+        this.barrier = barrier;
+
+    }
+
+    public void run() {
+        Random r = new Random();
+        System.out.println("student " + Thread.currentThread().getId() + " ready;");
+        try {
+            barrier.await();
+        } catch (InterruptedException | BrokenBarrierException e) {
+            e.printStackTrace();
+        }
+        System.out.println("student " + Thread.currentThread().getId() + " taking exam;");
+        try {
+            Thread.sleep((long) ((r.nextDouble() + 1) * 1000));//taking the exam.
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("student " + Thread.currentThread().getId() + " handing in exam;");
+        try {
+            barrier.await();
+        } catch (InterruptedException | BrokenBarrierException e) {
+            e.printStackTrace();
+        }
         System.out.println("student " + Thread.currentThread().getId() + " leaves");
     }
 }

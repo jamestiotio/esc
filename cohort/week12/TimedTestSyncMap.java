@@ -21,7 +21,8 @@ public class TimedTestSyncMap extends AddRemoveTest {
             barrier.await();
             barrier.await();
             long nsPerItem = timer.getTime() / (nPairThreads * (long) nTrials);
-            System.out.print("Throughput: " + nsPerItem + " ns/item");
+            System.out.println("Latency: " + nsPerItem + " ns/item");
+            System.out.println("Throughput: " + (1 / nsPerItem) + " items/ns");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

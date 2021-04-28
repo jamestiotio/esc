@@ -47,7 +47,7 @@ def plot_non_executor_web_servers():
                 ax[0].text(
                     data[0],
                     data[1],
-                    f"({data[0]}, {data[1]})",
+                    f"({data[0]:.0f}, {data[1]:.0f})",
                     color=color,
                     fontsize=8,
                     horizontalalignment="left",
@@ -56,7 +56,7 @@ def plot_non_executor_web_servers():
                 ax[1].text(
                     data[0],
                     data[2],
-                    f"({data[0]}, {data[2]})",
+                    f"({data[0]:.0f}, {data[2]:.5f})",
                     color=color,
                     fontsize=8,
                     horizontalalignment="right",
@@ -66,7 +66,7 @@ def plot_non_executor_web_servers():
                 ax[0].text(
                     data[0],
                     data[1],
-                    f"({data[0]}, {data[1]})",
+                    f"({data[0]:.0f}, {data[1]:.0f})",
                     color=color,
                     fontsize=8,
                     horizontalalignment="right",
@@ -75,7 +75,7 @@ def plot_non_executor_web_servers():
                 ax[1].text(
                     data[0],
                     data[2],
-                    f"({data[0]}, {data[2]})",
+                    f"({data[0]:.0f}, {data[2]:.5f})",
                     color=color,
                     fontsize=8,
                     horizontalalignment="right",
@@ -83,7 +83,7 @@ def plot_non_executor_web_servers():
                 )
 
     ax[0].set(xlabel="Number of clients", ylabel="Total time taken (ms)")
-    ax[1].set(xlabel="Number of clients", ylabel="Average throughput (ms/client)")
+    ax[1].set(xlabel="Number of clients", ylabel="Average throughput (clients/ms)")
     plt.show()
 
 
@@ -126,7 +126,7 @@ def plot_executor_web_servers():
             ax[0].text(
                 x,
                 y,
-                f"({x}, {y})",
+                f"({x:.0f}, {y:.0f})",
                 color=color,
                 fontsize=8,
                 horizontalalignment="right",
@@ -135,7 +135,7 @@ def plot_executor_web_servers():
             ax[1].text(
                 x,
                 z,
-                f"({x}, {z})",
+                f"({x:.0f}, {z:.3f})",
                 color=color,
                 fontsize=8,
                 horizontalalignment="right",
@@ -143,7 +143,7 @@ def plot_executor_web_servers():
             )
 
     ax[0].set(xlabel="Number of clients", ylabel="Total time taken (ms)")
-    ax[1].set(xlabel="Number of clients", ylabel="Average throughput (ms/client)")
+    ax[1].set(xlabel="Number of clients", ylabel="Average throughput (clients/ms)")
     plt.show()
 
 

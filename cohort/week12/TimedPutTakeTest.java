@@ -18,7 +18,8 @@ public class TimedPutTakeTest extends PutTakeTest {
             barrier.await(); // wait for all threads to be ready
             barrier.await(); // wait for all threads to finish
             long nsPerItem = timer.getTime() / (nPairs * (long) nTrials);
-            System.out.print("Throughput: " + nsPerItem + " ns/item");
+            System.out.println("Latency: " + nsPerItem + " ns/item");
+            System.out.println("Throughput: " + (1 / nsPerItem) + " items/ns");
             assert (putSum.get() == takeSum.get());
         } catch (Exception e) {
             throw new RuntimeException(e);

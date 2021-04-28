@@ -25,9 +25,10 @@ public class MultipleClient {
             clients[i].join();
         }
         long timeSpent = System.currentTimeMillis() - startTime;
-        double throughput = (double) timeSpent / (double) numberOfClients;
+        double latency = (double) timeSpent / (double) numberOfClients;
         System.out.println("Total spent time: " + timeSpent + " ms"); // Total time spent
-        System.out.println("Average throughput: " + throughput + " ms/client"); // Throughput
+        System.out.println("Average latency: " + latency + " ms/client"); // Latency
+        System.out.println("Average throughput: " + (1 / latency) + " clients/ms"); // Throughput
     }
 }
 

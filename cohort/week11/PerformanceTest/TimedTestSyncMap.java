@@ -37,7 +37,8 @@ public class TimedTestSyncMap extends AddRemoveTest {
             this.barrier.await();
             this.barrier.await();
             long timePerItem = this.timer.getTime() / (nPairThreads * (long) nTrials);
-            System.out.println("Throughput: " + timePerItem + " ns/item");  // Throughput is different compared to responsiveness
+            System.out.println("Latency: " + timePerItem + " ns/item");
+            System.out.println("Throughput: " + (1 / timePerItem) + " items/ns"); // Throughput is different compared to responsiveness
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

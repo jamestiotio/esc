@@ -11,13 +11,13 @@ import java.util.concurrent.FutureTask;
 // Use the lazy evaluation method.
 public class CacheV3 {
     private final ConcurrentHashMap<Integer, Future<List<Integer>>> results =
-            new ConcurrentHashMap<Integer, Future<List<Integer>>>(); // the last factors must be the
-                                                                     // factors of the last number
+            new ConcurrentHashMap<Integer, Future<List<Integer>>>(); // The last factors must be the
+                                                                     // factors of the last number.
 
     public List<Integer> service(final int input) throws Exception {
-        // the future result of factorization
+        // The future result of factorization is stored here.
         Future<List<Integer>> f;
-        // set up the futuretask
+        // Set up the FutureTask.
         Callable<List<Integer>> eval = new Callable<List<Integer>>() {
             public List<Integer> call() throws InterruptedException {
                 return factor(input);
@@ -25,8 +25,8 @@ public class CacheV3 {
         };
         FutureTask<List<Integer>> ft = new FutureTask<List<Integer>>(eval);
 
-        // execute put if absent, if there was no mapping, will put and
-        // return null. Use f for convenience
+        // Execute put if absent. If there was no mapping, will put and
+        // return null. Use f for convenience.
         f = results.putIfAbsent(input, ft);
 
         // If there was no previous mapping, go execute the FutureTask.

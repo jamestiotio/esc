@@ -7,7 +7,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
-// Parallelize the crawl method with the help of a thread pool. 
+// Parallelize the crawl method with the help of a thread pool.
+// Implemented a multi-threaded executor just for fun, along with the required compulsory blocking
+// queue specification.
 public class GDesktopWithThreadPool {
     private final static ExecutorService executor = new ScheduledThreadPoolExecutor(100);
 
@@ -15,6 +17,7 @@ public class GDesktopWithThreadPool {
     private final static int N_CONSUMERS = 4;
 
     public static void startIndexing(File[] roots) {
+        // Linked blocking queue here.
         final BlockingQueue<File> queue = new LinkedBlockingQueue<File>(BOUND);
         final FileFilter filter = new FileFilter() {
             public boolean accept(File file) {
@@ -25,7 +28,7 @@ public class GDesktopWithThreadPool {
 
     public void ParallelRecursiveFileCrawler(File[] roots, final FileFilter filter,
             final BlockingQueue<File> queue) {
-        // parallelizing FileCrawler
+        // Parallelizing the FileCrawler.
         for (final File root : roots) {
             executor.execute(new Runnable() {
                 public void run() {
@@ -68,9 +71,9 @@ public class GDesktopWithThreadPool {
         }
     }
 
-    // parallelizing Indexer
+    // Parallelizing the Indexer.
     public void ParallelRecursiveIndexer(File[] roots, final BlockingQueue<File> queue) {
-        // parallelizing FileCrawler
+        // Parallelizing the FileCrawler.
         for (final File root : roots) {
             executor.execute(new Runnable() {
                 public void run() {
@@ -87,9 +90,10 @@ public class GDesktopWithThreadPool {
     }
 
     private void indexFile(File file) {
-        // TODO Auto-generated method stub
+        // Code for analyzing the context of the file is skipped for simplicity.
     }
 }
+
 
 class FileCrawler extends Thread {
     private final BlockingQueue<File> fileQueue;
@@ -125,6 +129,7 @@ class FileCrawler extends Thread {
     }
 }
 
+
 class Indexer extends Thread {
     private final BlockingQueue<File> queue;
 
@@ -143,6 +148,6 @@ class Indexer extends Thread {
     }
 
     private void indexFile(File file) {
-        // TODO Auto-generated method stub
+        // Code for analyzing the context of the file is skipped for simplicity.
     }
 }

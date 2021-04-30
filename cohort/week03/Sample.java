@@ -1,4 +1,4 @@
-public class Plan {
+public class Plane {
     public String getType() {
         // ...
     }
@@ -6,6 +6,10 @@ public class Plan {
     public Miles MaximumDistance() {
         // ...
     }
+}
+
+public class Miles {
+    // ...
 }
 
 public class Flight {

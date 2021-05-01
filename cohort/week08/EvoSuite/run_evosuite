@@ -1,6 +1,7 @@
 #!/bin/bash
-# EvoSuite v1.1.0 is compatible with Java 9+ JDK, while EvoSuite v1.0.6 only provides support for Java 8 JDK (which has the presence of `tools.jar`)
-# Ensure that you have the appropriate correct JDK version and not just JRE
+# EvoSuite v1.1.0 is compatible with Java 9+ JDK, while EvoSuite v1.0.6 only provides support for Java 8 JDK (which has the presence of `tools.jar`).
+# Ensure that you have the appropriate correct JDK version and not just JRE.
+# For the purposes of this class/course/module, we explicitly specify the algorithm (monotonic genetic algorithm) instead of using the new DynaMOSA default.
 
 # To run this script: ./run_evosuite Example .
 

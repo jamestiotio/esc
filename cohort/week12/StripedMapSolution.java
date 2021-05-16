@@ -1,3 +1,5 @@
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Question for Cohort Exercise 8
  */
@@ -36,6 +38,7 @@ public class StripedMapSolution {
         int hash = hash(key);
 
         // TODO: Get the item with the given key in the map.
+        // Get method only needs to acquire one lock.
         synchronized (locks[hash % N_LOCKS]) {
             for (Node m = buckets[hash]; m != null; m = m.next)
                 if (m.key.equals(key)) {
@@ -47,23 +50,25 @@ public class StripedMapSolution {
     }
 
     public int size() {
-        int size = 0;
+        AtomicInteger size = new AtomicInteger(0);
 
         // TODO: Count the number of elements in the map.
+        // Size method needs to acquire all locks, but not necessarily simultaneously.
         for (int i = 0; i < buckets.length; i++) {
             synchronized (locks[i % N_LOCKS]) {
-                // Count length of bucket
+                // Count length of bucket.
                 for (Node m = buckets[i]; m != null; m = m.next) {
-                    size++;
+                    size.incrementAndGet();
                 }
             }
         }
 
-        return size;
+        return size.intValue();
     }
 
     public void clear() {
         // TODO: Remove all objects in the map.
+        // Clear method needs to acquire all locks, but not necessarily simultaneously.
         for (int i = 0; i < buckets.length; i++) {
             // Takes lock so nobody reads outdated value or updates the buckets.
             // However, when you delete buckets 0 to 15, somebody can read buckets 16 to 31.
@@ -87,5 +92,16 @@ public class StripedMapSolution {
             this.key = key;
             this.value = value;
         }
+    }
+
+    // For testing and debugging purposes
+    public static void main(String[] args) {
+        StripedMapSolution s = new StripedMapSolution(128);
+        s.put(100, 1000);
+        System.out.println(s.get(100));
+        System.out.println(s.get(101));
+        System.out.println(s.size());
+        s.clear();
+        System.out.println(s.size());
     }
 }

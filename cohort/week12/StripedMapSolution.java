@@ -58,7 +58,7 @@ public class StripedMapSolution {
             synchronized (locks[i % N_LOCKS]) {
                 // Count length of bucket.
                 for (Node m = buckets[i]; m != null; m = m.next) {
-                    size.incrementAndGet();
+                    size.getAndIncrement();
                 }
             }
         }
